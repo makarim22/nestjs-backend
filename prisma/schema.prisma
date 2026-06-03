@@ -54,7 +54,9 @@ model MovieReview {
   title       String
   director    String
   releaseYear Int
-  rating      Int      // 1 to 5 stars
+  rating      Int      // 0 to 10 scale
+  theGood     String?
+  theBad      String?
   watchDate   DateTime @default(now())
   posterUrl   String?
   review      String
@@ -69,7 +71,9 @@ model BookReview {
   title       String
   author      String
   publishYear Int
-  rating      Int      // 1 to 5 stars
+  rating      Int      // 0 to 10 scale
+  theGood     String?
+  theBad      String?
   readDate    DateTime @default(now())
   coverUrl    String?
   review      String
