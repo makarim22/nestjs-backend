@@ -7,8 +7,8 @@ export declare class PostsController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         slug: string;
+        title: string;
         content: string;
         status: string;
         publishedAt: Date | null;
@@ -18,8 +18,8 @@ export declare class PostsController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         slug: string;
+        title: string;
         content: string;
         status: string;
         publishedAt: Date | null;
@@ -29,8 +29,8 @@ export declare class PostsController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         slug: string;
+        title: string;
         content: string;
         status: string;
         publishedAt: Date | null;
@@ -40,8 +40,8 @@ export declare class PostsController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         slug: string;
+        title: string;
         content: string;
         status: string;
         publishedAt: Date | null;
@@ -51,8 +51,8 @@ export declare class PostsController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         slug: string;
+        title: string;
         content: string;
         status: string;
         publishedAt: Date | null;

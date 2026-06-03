@@ -14,8 +14,10 @@ model User {
   password  String   // Hashed password
   name      String?
   role      String   @default("EDITOR")
-  posts     Post[]
-  createdAt DateTime @default(now())
+  posts        Post[]
+  movieReviews MovieReview[]
+  bookReviews  BookReview[]
+  createdAt    DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
@@ -45,4 +47,34 @@ model Webhook {
   url       String
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
+}
+
+model MovieReview {
+  id          String   @id @default(uuid())
+  title       String
+  director    String
+  releaseYear Int
+  rating      Int      // 1 to 5 stars
+  watchDate   DateTime @default(now())
+  posterUrl   String?
+  review      String
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BookReview {
+  id          String   @id @default(uuid())
+  title       String
+  author      String
+  publishYear Int
+  rating      Int      // 1 to 5 stars
+  readDate    DateTime @default(now())
+  coverUrl    String?
+  review      String
+  authorId    String
+  userAuthor  User     @relation(fields: [authorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
