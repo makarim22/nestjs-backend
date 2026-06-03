@@ -7,55 +7,55 @@ export declare class PostsController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
+        authorId: string;
         title: string;
+        slug: string;
         content: string;
         status: string;
         publishedAt: Date | null;
-        authorId: string;
     }>;
     findAll(): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
+        authorId: string;
         title: string;
+        slug: string;
         content: string;
         status: string;
         publishedAt: Date | null;
-        authorId: string;
     }[]>;
     findOne(id: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
+        authorId: string;
         title: string;
+        slug: string;
         content: string;
         status: string;
         publishedAt: Date | null;
-        authorId: string;
     } | null>;
     update(id: string, updatePostDto: Prisma.PostUpdateInput): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
+        authorId: string;
         title: string;
+        slug: string;
         content: string;
         status: string;
         publishedAt: Date | null;
-        authorId: string;
     }>;
     remove(id: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
+        authorId: string;
         title: string;
+        slug: string;
         content: string;
         status: string;
         publishedAt: Date | null;
-        authorId: string;
     }>;
 }
