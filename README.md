@@ -1,86 +1,69 @@
-# NestJS CMS
+# ⚙️ My Media Log - Backend API
 
-A headless CMS built with [NestJS](https://nestjs.com/) and [Prisma](https://www.prisma.io/). This system handles user authentication, post management with scheduling capabilities, and a webhook dispatch system.
+A secure, high-performance REST API built with NestJS to serve as the headless backend for the Media Log application.
 
-## Features
+## ✨ Features
 
-- **Authentication:** JWT-based login and signup using Passport. Passwords are securely hashed with bcrypt.
-- **User Management:** User creation and retrieval with roles (`ADMIN`, `EDITOR`).
-- **Post Management:** Full CRUD for articles/posts. Supports drafted, published, and scheduled posts.
-- **Scheduler:** A background cron job that runs every minute to automatically publish scheduled posts that have reached their `publishedAt` time.
-- **Webhooks:** Register webhook URLs to receive HTTP ping notifications when a post's status changes to `PUBLISHED`.
+- **Media Management:** Complete CRUD endpoints for tracking Movies and Books.
+- **Secure Authentication:** Passport-powered JWT authentication to protect administrative routes (POST, PATCH, DELETE).
+- **Password Hashing:** Secure BCrypt salting and hashing for user credentials.
+- **Local File Uploads:** Integrated Multer configuration to handle cover art and movie poster image uploads locally.
+- **Static Asset Serving:** Automatically serves uploaded images directly to the frontend.
+- **Relational Database:** Powered by Prisma ORM and SQLite for a lightweight, deeply relational data structure.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Framework:** NestJS
-- **ORM:** Prisma (SQLite for local development)
-- **Security:** Passport.js, JWT, bcrypt
-- **Task Scheduling:** `@nestjs/schedule`
+- **ORM:** Prisma
+- **Database:** SQLite (Great for local/personal use)
+- **Authentication:** `@nestjs/jwt`, `passport`, `bcrypt`
+- **File Storage:** `@nestjs/platform-express` (Multer)
 
-## Prerequisites
+## 🚀 Getting Started
 
-- Node.js (v16+)
-- npm
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-## Installation
+### Installation
 
-1. **Clone the repository** (if applicable)
-2. **Install dependencies:**
+1. Clone the repository and navigate into the backend directory:
+   ```bash
+   cd nestjs
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. **Database Setup:**
-   Generate the Prisma client and run migrations to create the local SQLite database (`dev.db`).
+
+3. Generate the Prisma Client and run migrations:
    ```bash
    npx prisma generate
    npx prisma migrate dev
    ```
 
-## Running the App
+4. Seed the database with the initial Admin user:
+   ```bash
+   npm run seed
+   ```
 
+5. Start the development server:
+   ```bash
+   npm run start:dev
+   ```
+
+The API will now be running at `http://localhost:3000`. 
+Static uploads will be accessible at `http://localhost:3000/uploads/`.
+
+## 🗄️ Database Management
+You can easily view and manage your data visually using Prisma Studio:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npx prisma studio
 ```
+This will open a web-based database browser at `http://localhost:5555`.
 
-By default, the application runs on **http://localhost:3000**.
+## 📜 API Contract
+A full OpenAPI specification is available in the `api-contract.yaml` file located in the root of the project.
 
-## API Endpoints
-
-### Auth
-- `POST /auth/signup` - Register a new user.
-  - Body: `{ "email": "user@example.com", "password": "password123", "name": "John Doe", "role": "EDITOR" }`
-- `POST /auth/login` - Authenticate and receive a JWT access token.
-  - Body: `{ "email": "user@example.com", "password": "password123" }`
-
-### Posts (Requires JWT Bearer Token)
-- `GET /posts` - Retrieve all posts. (Public)
-- `GET /posts/:id` - Retrieve a specific post by ID. (Public)
-- `POST /posts` - Create a new post. (Protected)
-  - Body: `{ "title": "My Post", "slug": "my-post", "content": "Hello World", "status": "DRAFT" }`
-- `PATCH /posts/:id` - Update an existing post. (Protected)
-- `DELETE /posts/:id` - Delete a post. (Protected)
-
-### Webhooks (Requires JWT Bearer Token)
-- `GET /webhooks` - List all registered webhooks.
-- `POST /webhooks` - Register a new webhook.
-  - Body: `{ "name": "My Webhook", "url": "https://example.com/webhook" }`
-
-## Testing
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+## 📄 License
+This project is open-source and available under the MIT License.
