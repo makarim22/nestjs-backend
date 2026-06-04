@@ -9,9 +9,9 @@ export declare class PostsController {
         updatedAt: Date;
         authorId: string;
         title: string;
+        status: string;
         slug: string;
         content: string;
-        status: string;
         publishedAt: Date | null;
     }>;
     findAll(): Promise<{
@@ -20,9 +20,9 @@ export declare class PostsController {
         updatedAt: Date;
         authorId: string;
         title: string;
+        status: string;
         slug: string;
         content: string;
-        status: string;
         publishedAt: Date | null;
     }[]>;
     findOne(id: string): Promise<{
@@ -31,9 +31,9 @@ export declare class PostsController {
         updatedAt: Date;
         authorId: string;
         title: string;
+        status: string;
         slug: string;
         content: string;
-        status: string;
         publishedAt: Date | null;
     } | null>;
     update(id: string, updatePostDto: Prisma.PostUpdateInput): Promise<{
@@ -42,9 +42,9 @@ export declare class PostsController {
         updatedAt: Date;
         authorId: string;
         title: string;
+        status: string;
         slug: string;
         content: string;
-        status: string;
         publishedAt: Date | null;
     }>;
     remove(id: string): Promise<{
@@ -53,9 +53,9 @@ export declare class PostsController {
         updatedAt: Date;
         authorId: string;
         title: string;
+        status: string;
         slug: string;
         content: string;
-        status: string;
         publishedAt: Date | null;
     }>;
 }

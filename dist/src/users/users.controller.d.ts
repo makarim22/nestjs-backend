@@ -8,34 +8,36 @@ export declare class UsersController {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
+                authorId: string;
                 title: string;
                 director: string;
                 releaseYear: number;
                 rating: number;
+                status: string;
                 theGood: string | null;
                 theBad: string | null;
                 watchDate: Date;
                 posterUrl: string | null;
                 review: string;
-                authorId: string;
             };
         } & {
             id: string;
             createdAt: Date;
-            userId: string;
             movieReviewId: string;
+            userId: string;
         })[];
         savedBooks: ({
             bookReview: {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
+                authorId: string;
                 title: string;
                 rating: number;
+                status: string;
                 theGood: string | null;
                 theBad: string | null;
                 review: string;
-                authorId: string;
                 author: string;
                 publishYear: number;
                 readDate: Date;
@@ -49,6 +51,8 @@ export declare class UsersController {
         })[];
         id: string;
         email: string;
+        googleId: string | null;
+        avatarUrl: string | null;
         name: string | null;
         role: string;
         createdAt: Date;

@@ -63,7 +63,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "googleAuth", null);
 __decorate([
-    (0, common_1.Get)('google/callback'),
+    (0, common_1.Get)('google/redirect'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('google')),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Res)()),

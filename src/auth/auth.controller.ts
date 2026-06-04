@@ -23,15 +23,15 @@ export class AuthController {
 
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  async googleAuth(@Request() req) {
-    // Initiates the Google OAuth flow
+  async googleAuth(@Request() req: any) {
+    // Initiates the Google OAuth2 login flow
   }
 
-  @Get('google/callback')
+  @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Request() req, @Res() res) {
+  async googleAuthRedirect(@Request() req: any, @Res() res: any) {
     // Generate JWT token and redirect to frontend
-    const result = await this.authService.login(req.user);
+    const result = await this.authService.login((req as any).user);
     // Redirect to frontend auth callback route
     res.redirect(`http://localhost:5173/auth/callback?token=${result.access_token}`);
   }
