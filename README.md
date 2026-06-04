@@ -15,7 +15,7 @@ A secure, high-performance REST API built with NestJS to serve as the headless b
 
 - **Framework:** NestJS
 - **ORM:** Prisma
-- **Database:** SQLite (Great for local/personal use)
+- **Database:** SQLite (Serverless and managed by Prisma, no manual installation required! Data is stored locally in `dev.db`)
 - **Authentication:** `@nestjs/jwt`, `passport`, `bcrypt`
 - **File Storage:** `@nestjs/platform-express` (Multer)
 
@@ -23,6 +23,7 @@ A secure, high-performance REST API built with NestJS to serve as the headless b
 
 ### Prerequisites
 Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+*(Note: You do **not** need to install SQLite on your system. Prisma handles the database engine internally!)*
 
 ### Installation
 
