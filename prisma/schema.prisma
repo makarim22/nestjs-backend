@@ -9,16 +9,18 @@ generator client {
 
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String   // Hashed password
-  name      String?
-  role      String   @default("EDITOR")
+  id           String       @id @default(uuid())
+  email        String       @unique
+  password     String       // Hashed password
+  name         String?
+  role         String       @default("EDITOR")
   posts        Post[]
   movieReviews MovieReview[]
   bookReviews  BookReview[]
-  createdAt    DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  savedMovies  SavedMovie[] @relation("UserSavedMovies")
+  savedBooks   SavedBook[]  @relation("UserSavedBooks")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
 model Post {
@@ -50,35 +52,72 @@ model Webhook {
 }
 
 model MovieReview {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   title       String
   director    String
   releaseYear Int
-  rating      Int      // 0 to 10 scale
+  rating      Int          // 0 to 10 scale
   theGood     String?
   theBad      String?
-  watchDate   DateTime @default(now())
+  watchDate   DateTime     @default(now())
   posterUrl   String?
   review      String
   authorId    String
-  author      User     @relation(fields: [authorId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  author      User         @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  savedBy     SavedMovie[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model BookReview {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   title       String
   author      String
   publishYear Int
-  rating      Int      // 0 to 10 scale
+  rating      Int          // 0 to 10 scale
   theGood     String?
   theBad      String?
-  readDate    DateTime @default(now())
+  readDate    DateTime     @default(now())
   coverUrl    String?
   review      String
   authorId    String
-  userAuthor  User     @relation(fields: [authorId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  userAuthor  User         @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  savedBy     SavedBook[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Comment {
+  id            String       @id @default(uuid())
+  content       String
+  authorName    String?      // Optional, for anonymous users
+  movieReviewId String?
+  bookReviewId  String?
+  movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
+  bookReview    BookReview?  @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
+  createdAt     DateTime     @default(now())
+}
+
+model SavedMovie {
+  id            String       @id @default(uuid())
+  userId        String
+  user          User         @relation("UserSavedMovies", fields: [userId], references: [id], onDelete: Cascade)
+  movieReviewId String
+  movieReview   MovieReview  @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
+  createdAt     DateTime     @default(now())
+
+  @@unique([userId, movieReviewId])
+}
+
+model SavedBook {
+  id           String       @id @default(uuid())
+  userId       String
+  user         User         @relation("UserSavedBooks", fields: [userId], references: [id], onDelete: Cascade)
+  bookReviewId String
+  bookReview   BookReview   @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
+  createdAt    DateTime     @default(now())
+
+  @@unique([userId, bookReviewId])
 }

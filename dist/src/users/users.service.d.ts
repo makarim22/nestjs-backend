@@ -7,4 +7,18 @@ export declare class UsersService {
     findById(id: string): Promise<User | null>;
     create(data: Prisma.UserCreateInput): Promise<User>;
     findAll(): Promise<User[]>;
+    getProfile(userId: string): Promise<{
+        id: string;
+        email: string;
+        name: string | null;
+        role: string;
+        createdAt: Date;
+        updatedAt: Date;
+    } | null>;
+    toggleSavedMovie(userId: string, movieReviewId: string): Promise<{
+        status: string;
+    }>;
+    toggleSavedBook(userId: string, bookReviewId: string): Promise<{
+        status: string;
+    }>;
 }

@@ -6,7 +6,7 @@ const path_1 = require("path");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors();
-    app.useStaticAssets((0, path_1.join)(__dirname, '..', 'uploads'), {
+    app.useStaticAssets((0, path_1.join)(process.cwd(), 'uploads'), {
         prefix: '/uploads/',
     });
     await app.listen(process.env.PORT ?? 3000);

@@ -20,12 +20,14 @@ const movies_module_1 = require("./movies/movies.module");
 const books_module_1 = require("./books/books.module");
 const scheduler_module_1 = require("./scheduler/scheduler.module");
 const schedule_1 = require("@nestjs/schedule");
+const comments_module_1 = require("./comments/comments.module");
+const search_module_1 = require("./search/search.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, posts_module_1.PostsModule, webhooks_module_1.WebhooksModule, uploads_module_1.UploadsModule, movies_module_1.MoviesModule, books_module_1.BooksModule, scheduler_module_1.SchedulerModule, schedule_1.ScheduleModule.forRoot()],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, posts_module_1.PostsModule, webhooks_module_1.WebhooksModule, uploads_module_1.UploadsModule, movies_module_1.MoviesModule, books_module_1.BooksModule, scheduler_module_1.SchedulerModule, schedule_1.ScheduleModule.forRoot(), comments_module_1.CommentsModule, search_module_1.SearchModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
