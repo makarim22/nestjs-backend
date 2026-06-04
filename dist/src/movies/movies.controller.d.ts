@@ -18,6 +18,38 @@ export declare class MoviesController {
         createdAt: Date;
         updatedAt: Date;
     }>;
+    findPending(req: any): Promise<{
+        id: string;
+        title: string;
+        director: string;
+        releaseYear: number;
+        rating: number;
+        theGood: string | null;
+        theBad: string | null;
+        watchDate: Date;
+        posterUrl: string | null;
+        review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]> | {
+        message: string;
+    };
+    findMine(req: any): Promise<{
+        id: string;
+        title: string;
+        director: string;
+        releaseYear: number;
+        rating: number;
+        theGood: string | null;
+        theBad: string | null;
+        watchDate: Date;
+        posterUrl: string | null;
+        review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]>;
     findAll(): Promise<{
         id: string;
         title: string;
@@ -48,6 +80,23 @@ export declare class MoviesController {
         createdAt: Date;
         updatedAt: Date;
     } | null>;
+    updateStatus(id: string, status: string, req: any): Promise<{
+        id: string;
+        title: string;
+        director: string;
+        releaseYear: number;
+        rating: number;
+        theGood: string | null;
+        theBad: string | null;
+        watchDate: Date;
+        posterUrl: string | null;
+        review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }> | {
+        message: string;
+    };
     update(id: string, data: Prisma.MovieReviewUpdateInput): Promise<{
         id: string;
         title: string;

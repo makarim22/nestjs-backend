@@ -22,7 +22,22 @@ let MoviesService = class MoviesService {
     }
     async findAll() {
         return this.prisma.movieReview.findMany({
+            where: { status: 'APPROVED' },
             orderBy: { watchDate: 'desc' },
+            include: { author: { select: { name: true } } },
+        });
+    }
+    async findPending() {
+        return this.prisma.movieReview.findMany({
+            where: { status: 'PENDING' },
+            orderBy: { createdAt: 'desc' },
+            include: { author: { select: { name: true } } },
+        });
+    }
+    async findByUser(authorId) {
+        return this.prisma.movieReview.findMany({
+            where: { authorId },
+            orderBy: { createdAt: 'desc' },
             include: { author: { select: { name: true } } },
         });
     }

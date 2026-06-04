@@ -28,6 +28,41 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
+  async findOrCreateByGoogleId(profile: { googleId: string; email: string; name: string; avatarUrl: string }): Promise<User> {
+    let user = await this.prisma.user.findFirst({
+      where: {
+        OR: [
+          { googleId: profile.googleId },
+          { email: profile.email }
+        ]
+      }
+    });
+
+    if (user) {
+      if (!user.googleId || !user.avatarUrl) {
+        user = await this.prisma.user.update({
+          where: { id: user.id },
+          data: {
+            googleId: profile.googleId,
+            avatarUrl: profile.avatarUrl,
+            name: user.name || profile.name
+          }
+        });
+      }
+      return user;
+    }
+
+    return this.prisma.user.create({
+      data: {
+        email: profile.email,
+        googleId: profile.googleId,
+        name: profile.name,
+        avatarUrl: profile.avatarUrl,
+        role: 'USER' // Normal users created via Google are 'USER'
+      }
+    });
+  }
+
   async getProfile(userId: string) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },

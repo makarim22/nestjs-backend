@@ -7,13 +7,18 @@ export declare class UsersService {
     findById(id: string): Promise<User | null>;
     create(data: Prisma.UserCreateInput): Promise<User>;
     findAll(): Promise<User[]>;
+    findOrCreateByGoogleId(profile: {
+        googleId: string;
+        email: string;
+        name: string;
+        avatarUrl: string;
+    }): Promise<User>;
     getProfile(userId: string): Promise<{
         savedMovies: ({
             movieReview: {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                authorId: string;
                 title: string;
                 director: string;
                 releaseYear: number;
@@ -23,24 +28,25 @@ export declare class UsersService {
                 watchDate: Date;
                 posterUrl: string | null;
                 review: string;
+                authorId: string;
             };
         } & {
             id: string;
             createdAt: Date;
-            movieReviewId: string;
             userId: string;
+            movieReviewId: string;
         })[];
         savedBooks: ({
             bookReview: {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                authorId: string;
                 title: string;
                 rating: number;
                 theGood: string | null;
                 theBad: string | null;
                 review: string;
+                authorId: string;
                 author: string;
                 publishYear: number;
                 readDate: Date;

@@ -22,7 +22,22 @@ let BooksService = class BooksService {
     }
     async findAll() {
         return this.prisma.bookReview.findMany({
+            where: { status: 'APPROVED' },
             orderBy: { readDate: 'desc' },
+            include: { userAuthor: { select: { name: true } } },
+        });
+    }
+    async findPending() {
+        return this.prisma.bookReview.findMany({
+            where: { status: 'PENDING' },
+            orderBy: { createdAt: 'desc' },
+            include: { userAuthor: { select: { name: true } } },
+        });
+    }
+    async findByUser(authorId) {
+        return this.prisma.bookReview.findMany({
+            where: { authorId },
+            orderBy: { createdAt: 'desc' },
             include: { userAuthor: { select: { name: true } } },
         });
     }

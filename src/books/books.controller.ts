@@ -11,7 +11,23 @@ export class BooksController {
   @UseGuards(JwtAuthGuard)
   create(@Body() data: Prisma.BookReviewUncheckedCreateInput, @Request() req: any) {
     data.authorId = req.user.id;
+    data.status = (req.user.role === 'ADMIN' || req.user.role === 'EDITOR') ? 'APPROVED' : 'PENDING';
     return this.booksService.create(data);
+  }
+
+  @Get('pending')
+  @UseGuards(JwtAuthGuard)
+  findPending(@Request() req: any) {
+    if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
+      return { message: 'Unauthorized' };
+    }
+    return this.booksService.findPending();
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  findMine(@Request() req: any) {
+    return this.booksService.findByUser(req.user.id);
   }
 
   @Get()
@@ -22,6 +38,15 @@ export class BooksController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.booksService.findOne(id);
+  }
+
+  @Patch(':id/status')
+  @UseGuards(JwtAuthGuard)
+  updateStatus(@Param('id') id: string, @Body('status') status: string, @Request() req: any) {
+    if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
+      return { message: 'Unauthorized' };
+    }
+    return this.booksService.update(id, { status });
   }
 
   @Patch(':id')

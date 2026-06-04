@@ -56,11 +56,16 @@ let AuthService = class AuthService {
     }
     async validateUser(email, pass) {
         const user = await this.usersService.findOne(email);
-        if (user && (await bcrypt.compare(pass, user.password))) {
+        if (user && user.password && (await bcrypt.compare(pass, user.password))) {
             const { password, ...result } = user;
             return result;
         }
         return null;
+    }
+    async validateGoogleUser(profile) {
+        const user = await this.usersService.findOrCreateByGoogleId(profile);
+        const { password, ...result } = user;
+        return result;
     }
     async login(user) {
         const payload = { email: user.email, sub: user.id, role: user.role };

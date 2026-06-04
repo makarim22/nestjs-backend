@@ -11,7 +11,24 @@ export class MoviesController {
   @UseGuards(JwtAuthGuard)
   create(@Body() data: Prisma.MovieReviewUncheckedCreateInput, @Request() req: any) {
     data.authorId = req.user.id;
+    // Admins/Editors auto-approve, normal users are pending
+    data.status = (req.user.role === 'ADMIN' || req.user.role === 'EDITOR') ? 'APPROVED' : 'PENDING';
     return this.moviesService.create(data);
+  }
+
+  @Get('pending')
+  @UseGuards(JwtAuthGuard)
+  findPending(@Request() req: any) {
+    if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
+      return { message: 'Unauthorized' }; // Ideally use ForbiddenException
+    }
+    return this.moviesService.findPending();
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  findMine(@Request() req: any) {
+    return this.moviesService.findByUser(req.user.id);
   }
 
   @Get()
@@ -22,6 +39,15 @@ export class MoviesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.moviesService.findOne(id);
+  }
+
+  @Patch(':id/status')
+  @UseGuards(JwtAuthGuard)
+  updateStatus(@Param('id') id: string, @Body('status') status: string, @Request() req: any) {
+    if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
+      return { message: 'Unauthorized' };
+    }
+    return this.moviesService.update(id, { status });
   }
 
   @Patch(':id')

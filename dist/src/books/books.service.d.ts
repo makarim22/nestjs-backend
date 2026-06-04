@@ -5,6 +5,8 @@ export declare class BooksService {
     constructor(prisma: PrismaService);
     create(data: Prisma.BookReviewUncheckedCreateInput): Promise<BookReview>;
     findAll(): Promise<BookReview[]>;
+    findPending(): Promise<BookReview[]>;
+    findByUser(authorId: string): Promise<BookReview[]>;
     findOne(id: string): Promise<BookReview | null>;
     update(id: string, data: Prisma.BookReviewUpdateInput): Promise<BookReview>;
     remove(id: string): Promise<BookReview>;

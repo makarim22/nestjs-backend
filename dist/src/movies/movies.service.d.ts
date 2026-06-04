@@ -5,6 +5,8 @@ export declare class MoviesService {
     constructor(prisma: PrismaService);
     create(data: Prisma.MovieReviewUncheckedCreateInput): Promise<MovieReview>;
     findAll(): Promise<MovieReview[]>;
+    findPending(): Promise<MovieReview[]>;
+    findByUser(authorId: string): Promise<MovieReview[]>;
     findOne(id: string): Promise<MovieReview | null>;
     update(id: string, data: Prisma.MovieReviewUpdateInput): Promise<MovieReview>;
     remove(id: string): Promise<MovieReview>;

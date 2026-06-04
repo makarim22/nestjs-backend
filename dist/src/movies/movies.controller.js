@@ -24,13 +24,29 @@ let MoviesController = class MoviesController {
     }
     create(data, req) {
         data.authorId = req.user.id;
+        data.status = (req.user.role === 'ADMIN' || req.user.role === 'EDITOR') ? 'APPROVED' : 'PENDING';
         return this.moviesService.create(data);
+    }
+    findPending(req) {
+        if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
+            return { message: 'Unauthorized' };
+        }
+        return this.moviesService.findPending();
+    }
+    findMine(req) {
+        return this.moviesService.findByUser(req.user.id);
     }
     findAll() {
         return this.moviesService.findAll();
     }
     findOne(id) {
         return this.moviesService.findOne(id);
+    }
+    updateStatus(id, status, req) {
+        if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
+            return { message: 'Unauthorized' };
+        }
+        return this.moviesService.update(id, { status });
     }
     update(id, data) {
         return this.moviesService.update(id, data);
@@ -50,6 +66,22 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], MoviesController.prototype, "create", null);
 __decorate([
+    (0, common_1.Get)('pending'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], MoviesController.prototype, "findPending", null);
+__decorate([
+    (0, common_1.Get)('me'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], MoviesController.prototype, "findMine", null);
+__decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -62,6 +94,16 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], MoviesController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Patch)(':id/status'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('status')),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", void 0)
+], MoviesController.prototype, "updateStatus", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),

@@ -12,7 +12,9 @@ generator client {
 model User {
   id           String       @id @default(uuid())
   email        String       @unique
-  password     String       // Hashed password
+  password     String?      // Optional for Google login
+  googleId     String?      @unique
+  avatarUrl    String?
   name         String?
   role         String       @default("EDITOR")
   posts        Post[]
@@ -58,6 +60,7 @@ model MovieReview {
   director    String
   releaseYear Int
   rating      Int          // 0 to 10 scale
+  status      String       @default("PENDING") // PENDING, APPROVED, REJECTED
   theGood     String?
   theBad      String?
   watchDate   DateTime     @default(now())
@@ -77,6 +80,7 @@ model BookReview {
   author      String
   publishYear Int
   rating      Int          // 0 to 10 scale
+  status      String       @default("PENDING") // PENDING, APPROVED, REJECTED
   theGood     String?
   theBad      String?
   readDate    DateTime     @default(now())

@@ -13,11 +13,17 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(email);
-    if (user && (await bcrypt.compare(pass, user.password))) {
+    if (user && user.password && (await bcrypt.compare(pass, user.password))) {
       const { password, ...result } = user;
       return result;
     }
     return null;
+  }
+
+  async validateGoogleUser(profile: any): Promise<any> {
+    const user = await this.usersService.findOrCreateByGoogleId(profile);
+    const { password, ...result } = user;
+    return result;
   }
 
   async login(user: any) {

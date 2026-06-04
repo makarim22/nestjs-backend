@@ -35,6 +35,38 @@ let UsersService = class UsersService {
     async findAll() {
         return this.prisma.user.findMany();
     }
+    async findOrCreateByGoogleId(profile) {
+        let user = await this.prisma.user.findFirst({
+            where: {
+                OR: [
+                    { googleId: profile.googleId },
+                    { email: profile.email }
+                ]
+            }
+        });
+        if (user) {
+            if (!user.googleId || !user.avatarUrl) {
+                user = await this.prisma.user.update({
+                    where: { id: user.id },
+                    data: {
+                        googleId: profile.googleId,
+                        avatarUrl: profile.avatarUrl,
+                        name: user.name || profile.name
+                    }
+                });
+            }
+            return user;
+        }
+        return this.prisma.user.create({
+            data: {
+                email: profile.email,
+                googleId: profile.googleId,
+                name: profile.name,
+                avatarUrl: profile.avatarUrl,
+                role: 'USER'
+            }
+        });
+    }
     async getProfile(userId) {
         const user = await this.prisma.user.findUnique({
             where: { id: userId },
