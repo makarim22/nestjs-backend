@@ -7,8 +7,8 @@ export declare class MoviesController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        authorId: string;
         title: string;
+        authorId: string;
         director: string;
         releaseYear: number;
         rating: number;
@@ -22,8 +22,8 @@ export declare class MoviesController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        authorId: string;
         title: string;
+        authorId: string;
         director: string;
         releaseYear: number;
         rating: number;
@@ -37,8 +37,8 @@ export declare class MoviesController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        authorId: string;
         title: string;
+        authorId: string;
         director: string;
         releaseYear: number;
         rating: number;
@@ -52,8 +52,8 @@ export declare class MoviesController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        authorId: string;
         title: string;
+        authorId: string;
         director: string;
         releaseYear: number;
         rating: number;
@@ -67,8 +67,8 @@ export declare class MoviesController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        authorId: string;
         title: string;
+        authorId: string;
         director: string;
         releaseYear: number;
         rating: number;

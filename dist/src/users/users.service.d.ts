@@ -13,8 +13,8 @@ export declare class UsersService {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                authorId: string;
                 title: string;
+                authorId: string;
                 director: string;
                 releaseYear: number;
                 rating: number;
@@ -35,13 +35,13 @@ export declare class UsersService {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                authorId: string;
                 title: string;
+                authorId: string;
+                author: string;
                 rating: number;
                 theGood: string | null;
                 theBad: string | null;
                 review: string;
-                author: string;
                 publishYear: number;
                 readDate: Date;
                 coverUrl: string | null;
@@ -52,9 +52,9 @@ export declare class UsersService {
             userId: string;
             bookReviewId: string;
         })[];
+        name: string | null;
         id: string;
         email: string;
-        name: string | null;
         role: string;
         createdAt: Date;
         updatedAt: Date;
