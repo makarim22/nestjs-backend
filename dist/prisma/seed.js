@@ -36,7 +36,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const adapter_libsql_1 = require("@prisma/adapter-libsql");
 const bcrypt = __importStar(require("bcrypt"));
-const adapter = new adapter_libsql_1.PrismaLibSql({ url: 'file:./dev.db' });
+const url = process.env.DATABASE_URL || 'file:./dev.db';
+const authToken = process.env.TURSO_AUTH_TOKEN;
+const adapter = new adapter_libsql_1.PrismaLibSql({
+    url,
+    ...(authToken ? { authToken } : {}),
+});
 const prisma = new client_1.PrismaClient({ adapter });
 const movies = [
     {
