@@ -8,8 +8,8 @@ export declare class UsersController {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 authorId: string;
+                title: string;
                 director: string;
                 releaseYear: number;
                 rating: number;
@@ -30,13 +30,13 @@ export declare class UsersController {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 authorId: string;
-                author: string;
+                title: string;
                 rating: number;
                 theGood: string | null;
                 theBad: string | null;
                 review: string;
+                author: string;
                 publishYear: number;
                 readDate: Date;
                 coverUrl: string | null;
@@ -47,9 +47,9 @@ export declare class UsersController {
             userId: string;
             bookReviewId: string;
         })[];
-        name: string | null;
         id: string;
         email: string;
+        name: string | null;
         role: string;
         createdAt: Date;
         updatedAt: Date;

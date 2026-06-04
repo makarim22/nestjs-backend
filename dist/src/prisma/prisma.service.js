@@ -13,16 +13,14 @@ exports.PrismaService = void 0;
 const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
 const adapter_libsql_1 = require("@prisma/adapter-libsql");
-const client_2 = require("@libsql/client");
 let PrismaService = class PrismaService extends client_1.PrismaClient {
     constructor() {
         const url = process.env.DATABASE_URL || 'file:./dev.db';
         const authToken = process.env.TURSO_AUTH_TOKEN;
-        const libsql = (0, client_2.createClient)({
+        const adapter = new adapter_libsql_1.PrismaLibSql({
             url,
             ...(authToken ? { authToken } : {}),
         });
-        const adapter = new adapter_libsql_1.PrismaLibSql(libsql);
         super({ adapter });
     }
     async onModuleInit() {

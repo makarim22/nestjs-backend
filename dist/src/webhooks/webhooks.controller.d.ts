@@ -4,17 +4,17 @@ export declare class WebhooksController {
     private readonly webhooksService;
     constructor(webhooksService: WebhooksService);
     create(createWebhookDto: Prisma.WebhookCreateInput): Promise<{
-        name: string;
-        id: string;
-        createdAt: Date;
         url: string;
+        id: string;
+        name: string;
+        createdAt: Date;
         active: boolean;
     }>;
     findAll(): Promise<{
-        name: string;
-        id: string;
-        createdAt: Date;
         url: string;
+        id: string;
+        name: string;
+        createdAt: Date;
         active: boolean;
     }[]>;
 }
