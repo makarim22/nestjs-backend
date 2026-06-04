@@ -23,7 +23,7 @@ let BooksController = class BooksController {
         this.booksService = booksService;
     }
     create(data, req) {
-        data.authorId = req.user.userId;
+        data.authorId = req.user.id;
         return this.booksService.create(data);
     }
     findAll() {

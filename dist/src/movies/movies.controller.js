@@ -23,7 +23,7 @@ let MoviesController = class MoviesController {
         this.moviesService = moviesService;
     }
     create(data, req) {
-        data.authorId = req.user.userId;
+        data.authorId = req.user.id;
         return this.moviesService.create(data);
     }
     findAll() {

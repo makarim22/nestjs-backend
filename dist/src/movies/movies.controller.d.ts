@@ -5,9 +5,6 @@ export declare class MoviesController {
     constructor(moviesService: MoviesService);
     create(data: Prisma.MovieReviewUncheckedCreateInput, req: any): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        authorId: string;
         title: string;
         director: string;
         releaseYear: number;
@@ -17,12 +14,12 @@ export declare class MoviesController {
         watchDate: Date;
         posterUrl: string | null;
         review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findAll(): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        authorId: string;
         title: string;
         director: string;
         releaseYear: number;
@@ -32,12 +29,12 @@ export declare class MoviesController {
         watchDate: Date;
         posterUrl: string | null;
         review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
     findOne(id: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        authorId: string;
         title: string;
         director: string;
         releaseYear: number;
@@ -47,12 +44,12 @@ export declare class MoviesController {
         watchDate: Date;
         posterUrl: string | null;
         review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
     } | null>;
     update(id: string, data: Prisma.MovieReviewUpdateInput): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        authorId: string;
         title: string;
         director: string;
         releaseYear: number;
@@ -62,12 +59,12 @@ export declare class MoviesController {
         watchDate: Date;
         posterUrl: string | null;
         review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        authorId: string;
         title: string;
         director: string;
         releaseYear: number;
@@ -77,5 +74,8 @@ export declare class MoviesController {
         watchDate: Date;
         posterUrl: string | null;
         review: string;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

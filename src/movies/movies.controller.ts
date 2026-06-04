@@ -10,7 +10,7 @@ export class MoviesController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() data: Prisma.MovieReviewUncheckedCreateInput, @Request() req: any) {
-    data.authorId = req.user.userId;
+    data.authorId = req.user.id;
     return this.moviesService.create(data);
   }
 

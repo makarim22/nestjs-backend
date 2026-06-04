@@ -10,7 +10,7 @@ export class BooksController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() data: Prisma.BookReviewUncheckedCreateInput, @Request() req: any) {
-    data.authorId = req.user.userId;
+    data.authorId = req.user.id;
     return this.booksService.create(data);
   }
 
