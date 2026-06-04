@@ -9,26 +9,26 @@ export declare class CommentsController {
         bookReviewId?: string;
     }): Promise<{
         id: string;
-        content: string;
-        authorName: string | null;
         createdAt: Date;
+        content: string;
         movieReviewId: string | null;
         bookReviewId: string | null;
+        authorName: string | null;
     }>;
     findAllByMovie(id: string): Promise<{
         id: string;
-        content: string;
-        authorName: string | null;
         createdAt: Date;
+        content: string;
         movieReviewId: string | null;
         bookReviewId: string | null;
+        authorName: string | null;
     }[]>;
     findAllByBook(id: string): Promise<{
         id: string;
-        content: string;
-        authorName: string | null;
         createdAt: Date;
+        content: string;
         movieReviewId: string | null;
         bookReviewId: string | null;
+        authorName: string | null;
     }[]>;
 }

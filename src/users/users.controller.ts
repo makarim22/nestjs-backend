@@ -8,19 +8,29 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    return this.usersService.getProfile(req.user.userId);
+  getProfile(@Request() req: any) {
+    return this.usersService.getProfile(req.user.id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('save/movie/:id')
-  toggleSavedMovie(@Request() req, @Param('id') id: string) {
-    return this.usersService.toggleSavedMovie(req.user.userId, id);
+  async toggleSavedMovie(@Request() req: any, @Param('id') id: string) {
+    try {
+      return await this.usersService.toggleSavedMovie(req.user.id, id);
+    } catch (err) {
+      console.error('ERROR IN toggleSavedMovie:', err);
+      throw err;
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('save/book/:id')
-  toggleSavedBook(@Request() req, @Param('id') id: string) {
-    return this.usersService.toggleSavedBook(req.user.userId, id);
+  async toggleSavedBook(@Request() req: any, @Param('id') id: string) {
+    try {
+      return await this.usersService.toggleSavedBook(req.user.id, id);
+    } catch (err) {
+      console.error('ERROR IN toggleSavedBook:', err);
+      throw err;
+    }
   }
 }

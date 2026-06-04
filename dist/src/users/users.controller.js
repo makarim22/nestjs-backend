@@ -22,13 +22,25 @@ let UsersController = class UsersController {
         this.usersService = usersService;
     }
     getProfile(req) {
-        return this.usersService.getProfile(req.user.userId);
+        return this.usersService.getProfile(req.user.id);
     }
-    toggleSavedMovie(req, id) {
-        return this.usersService.toggleSavedMovie(req.user.userId, id);
+    async toggleSavedMovie(req, id) {
+        try {
+            return await this.usersService.toggleSavedMovie(req.user.id, id);
+        }
+        catch (err) {
+            console.error('ERROR IN toggleSavedMovie:', err);
+            throw err;
+        }
     }
-    toggleSavedBook(req, id) {
-        return this.usersService.toggleSavedBook(req.user.userId, id);
+    async toggleSavedBook(req, id) {
+        try {
+            return await this.usersService.toggleSavedBook(req.user.id, id);
+        }
+        catch (err) {
+            console.error('ERROR IN toggleSavedBook:', err);
+            throw err;
+        }
     }
 };
 exports.UsersController = UsersController;
@@ -47,7 +59,7 @@ __decorate([
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "toggleSavedMovie", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
@@ -56,7 +68,7 @@ __decorate([
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "toggleSavedBook", null);
 exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),

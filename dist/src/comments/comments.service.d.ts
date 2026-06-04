@@ -4,26 +4,26 @@ export declare class CommentsService {
     constructor(prisma: PrismaService);
     create(data: any): Promise<{
         id: string;
-        content: string;
-        authorName: string | null;
         createdAt: Date;
+        content: string;
         movieReviewId: string | null;
         bookReviewId: string | null;
+        authorName: string | null;
     }>;
     findAllByMovie(movieId: string): Promise<{
         id: string;
-        content: string;
-        authorName: string | null;
         createdAt: Date;
+        content: string;
         movieReviewId: string | null;
         bookReviewId: string | null;
+        authorName: string | null;
     }[]>;
     findAllByBook(bookId: string): Promise<{
         id: string;
-        content: string;
-        authorName: string | null;
         createdAt: Date;
+        content: string;
         movieReviewId: string | null;
         bookReviewId: string | null;
+        authorName: string | null;
     }[]>;
 }

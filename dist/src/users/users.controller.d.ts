@@ -3,6 +3,50 @@ export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
     getProfile(req: any): Promise<{
+        savedMovies: ({
+            movieReview: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                title: string;
+                director: string;
+                releaseYear: number;
+                rating: number;
+                theGood: string | null;
+                theBad: string | null;
+                watchDate: Date;
+                posterUrl: string | null;
+                review: string;
+                authorId: string;
+            };
+        } & {
+            id: string;
+            createdAt: Date;
+            userId: string;
+            movieReviewId: string;
+        })[];
+        savedBooks: ({
+            bookReview: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                title: string;
+                rating: number;
+                theGood: string | null;
+                theBad: string | null;
+                review: string;
+                authorId: string;
+                author: string;
+                publishYear: number;
+                readDate: Date;
+                coverUrl: string | null;
+            };
+        } & {
+            id: string;
+            createdAt: Date;
+            userId: string;
+            bookReviewId: string;
+        })[];
         id: string;
         email: string;
         name: string | null;
