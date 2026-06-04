@@ -35,7 +35,8 @@ let AuthController = class AuthController {
     }
     async googleAuthRedirect(req, res) {
         const result = await this.authService.login(req.user);
-        res.redirect(`http://localhost:5173/auth/callback?token=${result.access_token}`);
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+        res.redirect(`${frontendUrl}/auth/callback?token=${result.access_token}`);
     }
 };
 exports.AuthController = AuthController;

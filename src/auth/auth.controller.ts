@@ -32,7 +32,8 @@ export class AuthController {
   async googleAuthRedirect(@Request() req: any, @Res() res: any) {
     // Generate JWT token and redirect to frontend
     const result = await this.authService.login((req as any).user);
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
     // Redirect to frontend auth callback route
-    res.redirect(`http://localhost:5173/auth/callback?token=${result.access_token}`);
+    res.redirect(`${frontendUrl}/auth/callback?token=${result.access_token}`);
   }
 }
