@@ -3,15 +3,15 @@ export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
     signup(body: any): Promise<{
-        name: string | null;
         id: string;
-        email: string;
-        password: string | null;
-        googleId: string | null;
-        avatarUrl: string | null;
-        role: string;
         createdAt: Date;
         updatedAt: Date;
+        email: string;
+        googleId: string | null;
+        password: string | null;
+        avatarUrl: string | null;
+        name: string | null;
+        role: string;
     }>;
     login(body: any): Promise<{
         access_token: string;

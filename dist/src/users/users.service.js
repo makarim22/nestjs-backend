@@ -57,12 +57,14 @@ let UsersService = class UsersService {
             }
             return user;
         }
+        const randomPassword = Math.random().toString(36).slice(-10) + Math.random().toString(36).slice(-10);
         return this.prisma.user.create({
             data: {
                 email: profile.email,
                 googleId: profile.googleId,
                 name: profile.name,
                 avatarUrl: profile.avatarUrl,
+                password: randomPassword,
                 role: 'USER'
             }
         });

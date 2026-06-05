@@ -41,7 +41,6 @@ async function main() {
   await safeAlter(`ALTER TABLE "User" ADD COLUMN "googleId" TEXT`, 'Added googleId column');
   await safeAlter(`ALTER TABLE "User" ADD COLUMN "avatarUrl" TEXT`, 'Added avatarUrl column');
   await safeAlter(`ALTER TABLE "User" ADD COLUMN "name" TEXT`, 'Added name column');
-  await safeAlter(`ALTER TABLE "User" ADD COLUMN "password" TEXT`, 'Made password nullable');
 
   console.log('\n🎯 Applying schema fixes to MovieReview table...');
   await safeAlter(`ALTER TABLE "MovieReview" ADD COLUMN "status" TEXT NOT NULL DEFAULT 'APPROVED'`, 'Added status to MovieReview');

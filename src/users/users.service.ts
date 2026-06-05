@@ -52,12 +52,16 @@ export class UsersService {
       return user;
     }
 
+    // Generate a random password to satisfy the NOT NULL constraint in existing Turso DBs
+    const randomPassword = Math.random().toString(36).slice(-10) + Math.random().toString(36).slice(-10);
+
     return this.prisma.user.create({
       data: {
         email: profile.email,
         googleId: profile.googleId,
         name: profile.name,
         avatarUrl: profile.avatarUrl,
+        password: randomPassword, // satisfies SQLite NOT NULL constraint
         role: 'USER' // Normal users created via Google are 'USER'
       }
     });
