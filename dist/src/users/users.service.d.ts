@@ -16,20 +16,20 @@ export declare class UsersService {
     getProfile(userId: string): Promise<{
         savedMovies: ({
             movieReview: {
+                status: string;
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                authorId: string;
                 title: string;
                 director: string;
                 releaseYear: number;
                 rating: number;
-                status: string;
                 theGood: string | null;
                 theBad: string | null;
                 watchDate: Date;
                 posterUrl: string | null;
                 review: string;
+                createdAt: Date;
+                updatedAt: Date;
+                authorId: string;
             };
         } & {
             id: string;
@@ -39,16 +39,16 @@ export declare class UsersService {
         })[];
         savedBooks: ({
             bookReview: {
+                status: string;
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                authorId: string;
                 title: string;
                 rating: number;
-                status: string;
                 theGood: string | null;
                 theBad: string | null;
                 review: string;
+                createdAt: Date;
+                updatedAt: Date;
+                authorId: string;
                 author: string;
                 publishYear: number;
                 readDate: Date;
@@ -61,13 +61,13 @@ export declare class UsersService {
             bookReviewId: string;
         })[];
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        name: string | null;
         email: string;
         googleId: string | null;
         avatarUrl: string | null;
-        name: string | null;
         role: string;
-        createdAt: Date;
-        updatedAt: Date;
     } | null>;
     toggleSavedMovie(userId: string, movieReviewId: string): Promise<{
         status: string;
