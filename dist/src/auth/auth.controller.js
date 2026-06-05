@@ -11,12 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var AuthController_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const auth_service_1 = require("./auth.service");
-let AuthController = class AuthController {
+let AuthController = AuthController_1 = class AuthController {
     authService;
     constructor(authService) {
         this.authService = authService;
@@ -33,10 +34,19 @@ let AuthController = class AuthController {
     }
     async googleAuth(req) {
     }
+    logger = new common_1.Logger(AuthController_1.name);
     async googleAuthRedirect(req, res) {
-        const result = await this.authService.login(req.user);
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-        res.redirect(`${frontendUrl}/auth/callback?token=${result.access_token}`);
+        try {
+            this.logger.log('Google callback hit. User from passport: ' + JSON.stringify(req.user));
+            const result = await this.authService.login(req.user);
+            const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+            res.redirect(`${frontendUrl}/auth/callback?token=${result.access_token}`);
+        }
+        catch (error) {
+            this.logger.error('Google OAuth callback failed: ' + error.message, error.stack);
+            const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+            res.redirect(`${frontendUrl}/login?error=oauth_failed&reason=${encodeURIComponent(error.message)}`);
+        }
     }
 };
 exports.AuthController = AuthController;
@@ -64,7 +74,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "googleAuth", null);
 __decorate([
-    (0, common_1.Get)('google'),
+    (0, common_1.Get)('google/callback'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('google')),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Res)()),
@@ -72,7 +82,7 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "googleAuthRedirect", null);
-exports.AuthController = AuthController = __decorate([
+exports.AuthController = AuthController = AuthController_1 = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);

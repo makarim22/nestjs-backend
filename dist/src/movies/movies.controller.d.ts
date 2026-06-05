@@ -4,12 +4,12 @@ export declare class MoviesController {
     private readonly moviesService;
     constructor(moviesService: MoviesService);
     create(data: Prisma.MovieReviewUncheckedCreateInput, req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -20,12 +20,12 @@ export declare class MoviesController {
         authorId: string;
     }>;
     findPending(req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -38,12 +38,12 @@ export declare class MoviesController {
         message: string;
     };
     findMine(req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -54,12 +54,12 @@ export declare class MoviesController {
         authorId: string;
     }[]>;
     findAll(): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -70,12 +70,12 @@ export declare class MoviesController {
         authorId: string;
     }[]>;
     findOne(id: string): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -86,12 +86,12 @@ export declare class MoviesController {
         authorId: string;
     } | null>;
     updateStatus(id: string, status: string, req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -104,12 +104,12 @@ export declare class MoviesController {
         message: string;
     };
     update(id: string, data: Prisma.MovieReviewUpdateInput): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;
@@ -120,12 +120,12 @@ export declare class MoviesController {
         authorId: string;
     }>;
     remove(id: string): Promise<{
-        status: string;
         id: string;
         title: string;
         director: string;
         releaseYear: number;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         watchDate: Date;

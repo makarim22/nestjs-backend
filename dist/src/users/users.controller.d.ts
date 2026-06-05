@@ -5,12 +5,12 @@ export declare class UsersController {
     getProfile(req: any): Promise<{
         savedMovies: ({
             movieReview: {
-                status: string;
                 id: string;
                 title: string;
                 director: string;
                 releaseYear: number;
                 rating: number;
+                status: string;
                 theGood: string | null;
                 theBad: string | null;
                 watchDate: Date;
@@ -28,10 +28,10 @@ export declare class UsersController {
         })[];
         savedBooks: ({
             bookReview: {
-                status: string;
                 id: string;
                 title: string;
                 rating: number;
+                status: string;
                 theGood: string | null;
                 theBad: string | null;
                 review: string;
@@ -52,10 +52,10 @@ export declare class UsersController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string | null;
         email: string;
         googleId: string | null;
         avatarUrl: string | null;
+        name: string | null;
         role: string;
     } | null>;
     toggleSavedMovie(req: any, id: string): Promise<{

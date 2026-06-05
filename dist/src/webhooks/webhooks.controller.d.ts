@@ -6,15 +6,15 @@ export declare class WebhooksController {
     create(createWebhookDto: Prisma.WebhookCreateInput): Promise<{
         id: string;
         createdAt: Date;
-        name: string;
         url: string;
+        name: string;
         active: boolean;
     }>;
     findAll(): Promise<{
         id: string;
         createdAt: Date;
-        name: string;
         url: string;
+        name: string;
         active: boolean;
     }[]>;
 }

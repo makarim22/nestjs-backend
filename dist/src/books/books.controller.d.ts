@@ -4,10 +4,10 @@ export declare class BooksController {
     private readonly booksService;
     constructor(booksService: BooksService);
     create(data: Prisma.BookReviewUncheckedCreateInput, req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -20,10 +20,10 @@ export declare class BooksController {
         coverUrl: string | null;
     }>;
     findPending(req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -38,10 +38,10 @@ export declare class BooksController {
         message: string;
     };
     findMine(req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -54,10 +54,10 @@ export declare class BooksController {
         coverUrl: string | null;
     }[]>;
     findAll(): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -70,10 +70,10 @@ export declare class BooksController {
         coverUrl: string | null;
     }[]>;
     findOne(id: string): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -86,10 +86,10 @@ export declare class BooksController {
         coverUrl: string | null;
     } | null>;
     updateStatus(id: string, status: string, req: any): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -104,10 +104,10 @@ export declare class BooksController {
         message: string;
     };
     update(id: string, data: Prisma.BookReviewUpdateInput): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
@@ -120,10 +120,10 @@ export declare class BooksController {
         coverUrl: string | null;
     }>;
     remove(id: string): Promise<{
-        status: string;
         id: string;
         title: string;
         rating: number;
+        status: string;
         theGood: string | null;
         theBad: string | null;
         review: string;
