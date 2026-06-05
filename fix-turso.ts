@@ -12,13 +12,10 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('Connecting to Turso database...');
-  const libsql = createClient({
+  const adapter = new PrismaLibSql({
     url,
     authToken,
   });
-  
-  const adapter = new PrismaLibSql(libsql);
   const prisma = new PrismaClient({ adapter });
 
   try {
