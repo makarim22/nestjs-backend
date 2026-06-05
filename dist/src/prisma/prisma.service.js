@@ -26,11 +26,9 @@ let PrismaService = class PrismaService extends client_1.PrismaClient {
     async onModuleInit() {
         await this.$connect();
         await this.movieReview.updateMany({
-            where: { status: 'PENDING' },
             data: { status: 'APPROVED' }
         });
         await this.bookReview.updateMany({
-            where: { status: 'PENDING' },
             data: { status: 'APPROVED' }
         });
     }

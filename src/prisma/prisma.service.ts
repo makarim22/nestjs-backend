@@ -18,13 +18,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 
   async onModuleInit() {
     await this.$connect();
-    // Auto-approve all existing PENDING reviews
+    // Auto-approve all existing reviews to ensure remote DB is fixed regardless of current status (null/PENDING)
     await this.movieReview.updateMany({
-      where: { status: 'PENDING' },
       data: { status: 'APPROVED' }
     });
     await this.bookReview.updateMany({
-      where: { status: 'PENDING' },
       data: { status: 'APPROVED' }
     });
   }
