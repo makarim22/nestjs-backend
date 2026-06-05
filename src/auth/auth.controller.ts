@@ -27,7 +27,7 @@ export class AuthController {
     // Initiates the Google OAuth2 login flow
   }
 
-  @Get('google/redirect')
+  @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Request() req: any, @Res() res: any) {
     // Generate JWT token and redirect to frontend
