@@ -25,12 +25,6 @@ let PrismaService = class PrismaService extends client_1.PrismaClient {
     }
     async onModuleInit() {
         await this.$connect();
-        await this.movieReview.updateMany({
-            data: { status: 'APPROVED' }
-        });
-        await this.bookReview.updateMany({
-            data: { status: 'APPROVED' }
-        });
     }
     async onModuleDestroy() {
         await this.$disconnect();
