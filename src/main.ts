@@ -8,6 +8,7 @@ import { join } from 'path';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
+  app.set('trust proxy', 1); // Essential for Google OAuth relative URLs behind a reverse proxy (e.g. Vercel, Render)
   
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
