@@ -32,7 +32,16 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
    cd nestjs
    ```
 
-2. Install dependencies:
+2. Configure Environment Variables:
+   Create a `.env` file in the root directory and add your OAuth credentials:
+   ```env
+   GOOGLE_CLIENT_ID="your-client-id"
+   GOOGLE_CLIENT_SECRET="your-client-secret"
+   FRONTEND_URL="http://localhost:5173"
+   BACKEND_URL="http://localhost:3000"
+   ```
+
+3. Install dependencies:
    ```bash
    npm install
    ```

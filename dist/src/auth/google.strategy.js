@@ -20,7 +20,7 @@ let GoogleStrategy = class GoogleStrategy extends (0, passport_1.PassportStrateg
         super({
             clientID: process.env.GOOGLE_CLIENT_ID || 'dummy-client-id',
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'dummy-client-secret',
-            callbackURL: '/auth/google/callback',
+            callbackURL: `${process.env.BACKEND_URL || 'http://localhost:3000'}/auth/google/callback`,
             scope: ['email', 'profile'],
             proxy: true,
         });

@@ -219,6 +219,61 @@ const movies = [
         theGood: "A miraculous tightrope walk between absurd maximalist sci-fi comedy and deeply affecting family drama. It is bursting with sheer, unbridled creativity.",
         theBad: "The sheer volume of visual and narrative chaos in the second act can be overwhelming and exhausting for viewers unaccustomed to hyper-kinetic pacing.",
         review: "Everything Everywhere All at Once is a cinematic anomaly—a film that attempts to compress the infinite, terrifying chaos of the multiverse into a story about a middle-aged Chinese immigrant woman trying to finish her taxes. Directors Daniel Kwan and Daniel Scheinert (the Daniels) have crafted a masterpiece of maximalist storytelling, successfully marrying the absurd, juvenile humor of the internet age with a profound, tear-jerking exploration of generational trauma, existential dread, and the radical power of kindness.\n\nMichelle Yeoh delivers the performance of a lifetime as Evelyn Wang, a laundromat owner crushed by the weight of her own unrealized potential and her strained relationships with her husband, Waymond (Ke Huy Quan), and her daughter, Joy (Stephanie Hsu). When Evelyn is thrust into a multiverse-spanning conflict against an omnipotent nihilist named Jobu Tupaki (who is a fractured version of her own daughter), the film explodes into a dizzying array of martial arts, hot dog fingers, sentient rocks, and raccoon chefs. The editing is nothing short of miraculous, managing to keep dozens of chaotic parallel universes emotionally and narratively coherent.\n\nHowever, the multiverse in this film is not a corporate playground for IP cameos; it is a philosophical metaphor for the overwhelming anxiety of the modern condition. The central antagonist, Jobu Tupaki, represents the black hole of millennial nihilism—the feeling that because we can see every possible life we could have lived, and because nothing truly matters on a cosmic scale, we should simply surrender to the void. The 'Everything Bagel' is the ultimate symbol of depression: an accretion disk of overwhelming information that crushes the soul.\n\nThe film’s brilliant counter-argument is delivered by Ke Huy Quan’s Waymond, whose gentle optimism is revealed not as naivety, but as an active, courageous choice in the face of a cruel universe. The climax of the film rejects the traditional violent resolution of an action movie; Evelyn wins not by defeating her enemies, but by radically accepting them, understanding their pain, and choosing empathy over apathy.\n\nEverything Everywhere All at Once is chaotic, loud, weird, and incredibly beautiful. It takes the most absurd, ridiculous concepts imaginable and uses them to drill directly into the human heart. It is a profound statement that even in an infinite universe where nothing matters, we can choose to make the people right in front of us matter. A monumental achievement.",
+    },
+    {
+        title: "In the Mood for Love",
+        director: "Wong Kar-wai",
+        releaseYear: 2000,
+        rating: 10,
+        watchDate: new Date("2024-06-06"),
+        posterUrl: "https://placehold.co/500x750/3a0000/ffcc00/png?text=In+the+Mood+for+Love",
+        theGood: "The most visually intoxicating and emotionally devastating romance of the 21st century. Every frame is a painting of repressed desire.",
+        theBad: "The deliberately languid pacing and lack of traditional plot resolution can frustrate viewers seeking conventional romantic catharsis.",
+        review: "Wong Kar-wai’s In the Mood for Love is not a film about an affair; it is a film about the devastating, suffocating space that exists just before one begins. Set in 1962 Hong Kong, it follows two neighbors, Mr. Chow (Tony Leung) and Mrs. Chan (Maggie Cheung), who discover that their respective spouses are cheating on them with each other. Bound by shared grief and a stubborn, tragic adherence to propriety, they begin a deeply intimate friendship that slowly, painfully inches toward love, even as they vow, 'We won't be like them.'\n\nVisually, the film is an absolute masterpiece of atmosphere and longing. Cinematographers Christopher Doyle and Mark Lee Ping-bin shoot the film entirely in cramped, claustrophobic spaces—narrow hallways, rain-slicked alleyways, the backs of taxis, and dimly lit noodle stands. The camera often watches the characters through mirrors, doorways, and windows, mimicking the oppressive, judgmental gaze of their conservative society. The color palette is overwhelmingly saturated with blood reds, mustard yellows, and deep shadows, externalizing the intense, unexpressed passions of the protagonists.\n\nMaggie Cheung and Tony Leung deliver performances of almost unbearable restraint. So much of the film's emotional weight is carried in unspoken glances, the brush of a hand, or the slow exhalation of cigarette smoke. Cheung’s astonishing array of high-collared cheongsams act as both armor and prison, physically restricting her movement while highlighting her devastating elegance. Leung’s Mr. Chow is a portrait of quiet, agonizing decency; his eyes convey a universe of sadness that he refuses to speak aloud.\n\nThe film’s soundtrack is equally iconic, particularly Shigeru Umebayashi’s 'Yumeji’s Theme,' a mournful, waltzing violin piece that loops relentlessly throughout the film, locking the characters in a cycle of desire and denial. Nat King Cole’s Spanish-language ballads provide a lush, romantic counterpoint to the characters' rigid emotional control.\n\nIn the Mood for Love is a tragedy of timing and morality. It is a haunting exploration of memories, missed connections, and the secrets we whisper into the hollows of trees. It is arguably the most beautiful film ever made about the things people choose not to do.",
+    },
+    {
+        title: "Blade Runner",
+        director: "Ridley Scott",
+        releaseYear: 1982,
+        rating: 10,
+        watchDate: new Date("2024-05-15"),
+        posterUrl: "https://placehold.co/500x750/001f3f/00ffff/png?text=Blade+Runner",
+        theGood: "A foundational text of modern science fiction. Its rain-soaked, neon-lit cyberpunk aesthetic permanently redefined how we visualize the future.",
+        theBad: "The narrative is notoriously disjointed depending on which of the many cuts you watch, and Harrison Ford's character can feel shockingly passive.",
+        review: "Ridley Scott’s Blade Runner was a commercial failure upon its release in 1982, misunderstood by critics and audiences alike. Decades later, its influence is so absolute and pervasive that it is nearly impossible to imagine the modern science fiction genre without it. Adapting Philip K. Dick’s 'Do Androids Dream of Electric Sheep?', Scott abandoned much of the novel’s philosophical plotting in favor of creating a staggering, overwhelming visual poem about mortality, memory, and what it fundamentally means to be human.\n\nThe film’s vision of Los Angeles in 2019 is a masterpiece of world-building. It is a suffocating, rain-drenched megalopolis where towering pyramids of corporate wealth cast long shadows over incredibly dense, multicultural slums. The juxtaposition of massive neon Coca-Cola advertisements against the decaying, garbage-strewn streets birthed the cyberpunk aesthetic—a future defined by 'high tech and low life.' Vangelis's legendary synthesizer score is the lifeblood of this city, oscillating between sweeping, romantic melancholy and cold, synthetic dread.\n\nAt the center of this world is Rick Deckard (Harrison Ford), a weary ex-cop tasked with hunting down four rogue 'replicants'—bio-engineered androids indistinguishable from humans, who have returned to Earth seeking a way to extend their four-year lifespans. Ford plays Deckard not as a traditional action hero, but as a burned-out, deeply compromised exterminator. His romance with Rachael (Sean Young), a replicant who believes she is human, is fraught, morally ambiguous, and deeply tragic.\n\nHowever, the true heart of Blade Runner belongs to Rutger Hauer’s Roy Batty, the leader of the rogue replicants. Batty is a genetically engineered super-soldier designed for violence, yet he is the only character in the film who displays genuine passion, grief, and an overwhelming desire simply to live. His final confrontation with Deckard is not a triumph of law over crime, but a terrifying display of physical superiority that ends in an act of profound, unexpected grace. Batty’s legendary 'Tears in Rain' monologue—partially improvised by Hauer on set—remains one of the most beautiful and heartbreaking moments in cinematic history.\n\nBlade Runner is a messy, complicated, and utterly brilliant film. It poses questions it refuses to answer, lingering in the dark, smoky corners of its own universe. It is a neo-noir masterpiece that proves the future is just as tragic and beautiful as the past.",
+    },
+    {
+        title: "City of God",
+        director: "Fernando Meirelles and Kátia Lund",
+        releaseYear: 2002,
+        rating: 10,
+        watchDate: new Date("2024-06-04"),
+        posterUrl: "https://placehold.co/500x750/8b0000/ffffff/png?text=City+of+God",
+        theGood: "A blistering, breathless dive into the favelas of Rio de Janeiro. The editing is kinetic, the performances are incredibly raw, and the energy is unparalleled.",
+        theBad: "The sheer volume of casual, brutal violence involving young children makes it an incredibly harrowing and difficult watch.",
+        review: "City of God (Cidade de Deus) is a film that grabs you by the throat in its opening frames and refuses to let go until the credits roll. Directed by Fernando Meirelles and Kátia Lund, this Brazilian masterpiece chronicles three decades in the life of a notorious Rio de Janeiro favela, tracking its evolution from a relatively peaceful, working-class neighborhood in the 1960s to a heavily armed, blood-soaked war zone controlled by adolescent drug lords in the 1980s. It is a staggering achievement of kinetic filmmaking and brutal social realism.\n\nThe film’s narrative structure is brilliant, guided by the narration of Rocket (Alexandre Rodrigues), a young man who dreams of escaping the favela not through violence, but through photography. Rocket serves as the audience’s desperately needed moral anchor in a world where morality is a luxury nobody can afford. Through his lens, we are introduced to a sprawling, Dickensian cast of characters, most notably the terrifyingly sociopathic Li'l Zé (Leandro Firmino), who murders his way to the top of the drug trade with terrifying, gleeful abandon.\n\nWhat sets City of God apart from traditional gangster films is its cast. Nearly all the actors were non-professionals, recruited directly from the favelas of Rio. This casting choice imbues the film with an overwhelming, terrifying authenticity. When we see a child holding a gun, the horror is amplified because the children on screen possess a lived-in understanding of the environment they are portraying. The performances are incredibly raw, spontaneous, and devastatingly real.\n\nThe visual style of the film is a masterclass in kinetic energy. The camera is constantly moving, utilizing whip pans, freeze frames, split screens, and rapid-fire montage to match the chaotic, adrenaline-fueled reality of life in the favela. The color grading shifts alongside the timeline: the 1960s are bathed in a warm, nostalgic golden sepia, while the violence of the 1980s is rendered in harsh, washed-out blues and stark, oppressive sunlight. The editing is aggressive and flawless, propelling the narrative forward with terrifying momentum.\n\nCity of God is an exhaustive, exhausting tragedy. It is a searing indictment of systemic poverty and government neglect, showing how a lack of opportunity guarantees an endless cycle of violence. Yet, despite its bleak subject matter, the film is bursting with life, humor, and an undeniable cinematic vitality. It is a masterpiece that demands to be witnessed.",
+    },
+    {
+        title: "Mad Max: Fury Road",
+        director: "George Miller",
+        releaseYear: 2015,
+        rating: 10,
+        watchDate: new Date("2024-05-30"),
+        posterUrl: "https://placehold.co/500x750/cc5500/000000/png?text=Mad+Max:+Fury+Road",
+        theGood: "A total triumph of practical filmmaking and visual storytelling. It is a two-hour chase sequence that doubles as a profound feminist action epic.",
+        theBad: "Those looking for traditional, dialogue-heavy plot exposition will find themselves entirely lost in the dust and the roar of the V8 engines.",
+        review: "George Miller was seventy years old when he returned to the franchise he created, and he delivered a film that made every other action director in Hollywood look like they were moving in slow motion. Mad Max: Fury Road is a miracle of modern cinema—a relentless, two-hour car chase through a post-apocalyptic wasteland that relies almost entirely on practical effects, jaw-dropping stunt work, and pure visual storytelling to convey a profound narrative of trauma, redemption, and feminist rebellion.\n\nThe genius of Fury Road lies in its structural simplicity. The plot is essentially a straight line out into the desert, followed by a straight line back. Yet, within that relentless forward momentum, Miller builds an incredibly dense, horrifyingly coherent world. We learn everything we need to know about the tyrannical Immortan Joe, his death-cult of War Boys, and the desperate, water-starved populace of the Citadel not through lengthy exposition, but through character design, vehicular architecture, and action. Every spiked tire, every steering wheel shrine, and every chrome-sprayed mouth tells a story.\n\nTom Hardy takes over the titular role of Max Rockatansky, playing him as a feral, traumatized survivor who has been reduced to a mere 'blood bag' by the beginning of the film. However, the true protagonist of Fury Road is Charlize Theron’s Imperator Furiosa. With her shaved head, mechanical arm, and grease-painted eyes, Furiosa instantly became one of the greatest action heroes in cinematic history. Her mission to liberate Immortan Joe’s 'Five Wives'—women kept as breeding stock in a sterile vault—elevates the film from a simple survival story into a literal war for bodily autonomy.\n\nThe action choreography is unparalleled. Miller and his stunt team orchestrated genuine vehicular warfare in the Namibian desert, flipping massive big rigs and swinging polecats between moving cars at fifty miles per hour. Margaret Sixel’s Academy Award-winning editing ensures that, despite the overwhelming chaos of flaming trucks and exploding war rigs, the spatial geography is always perfectly clear. You always know exactly who is fighting whom, and what the stakes are.\n\nMad Max: Fury Road is a symphony of fire and twisted metal, scored by Junkie XL's pounding, operatic soundtrack. It proves that the action genre does not need to be mindless to be thrilling. It is a visceral, breathless masterpiece that will be studied by filmmakers for decades to come. What a lovely day, indeed.",
+    },
+    {
+        title: "Apocalypse Now",
+        director: "Francis Ford Coppola",
+        releaseYear: 1979,
+        rating: 10,
+        watchDate: new Date("2024-06-01"),
+        posterUrl: "https://placehold.co/500x750/003300/ff0000/png?text=Apocalypse+Now",
+        theGood: "A hallucinatory, Wagnerian descent into the madness of the Vietnam War. Its ambition, scale, and philosophical weight are completely staggering.",
+        theBad: "The famously chaotic production is occasionally visible in the film's sprawling, unwieldy final act, which abandons traditional narrative for pure surrealism.",
+        review: "If The Godfather was Francis Ford Coppola's perfectly controlled studio masterpiece, Apocalypse Now is his brilliant, terrifying descent into madness. Adapting Joseph Conrad's Heart of Darkness and relocating it to the Vietnam War, Coppola did not just make a movie about a war; as he famously stated, 'My film is not a movie. My film is not about Vietnam. It is Vietnam.' It is a hallucinatory, psychedelic journey upriver into the absolute darkest recesses of the human soul, and a searing indictment of American imperial hubris.\n\nThe film follows Captain Willard (Martin Sheen), a burnt-out intelligence officer assigned to travel up the Nùng River into Cambodia to assassinate Colonel Walter Kurtz (Marlon Brando), a highly decorated Green Beret who has gone completely insane and established himself as a demigod among a local tribe. As Willard travels deeper into the jungle, the film slowly strips away the veneer of military order, revealing a war effort that has descended into total, terrifying absurdity.\n\nThe set pieces in Apocalypse Now are among the most famous and visually staggering in cinematic history. The helicopter assault on a Viet Cong village, set to Richard Wagner’s 'Ride of the Valkyries' and led by the surf-obsessed, napalm-loving Lieutenant Colonel Kilgore (Robert Duvall), is a terrifying display of technological supremacy masking moral bankruptcy. Vittorio Storaro’s cinematography captures the jungle not as a physical location, but as a living, breathing psychological entity. The use of smoke, flares, and deeply saturated oranges and greens gives the film the texture of a fever dream.\n\nThe final act of the film, entirely dominated by Marlon Brando's improvised, shadow-drenched performance as Kurtz, shifts the film from a war movie into pure philosophical horror. Kurtz is not a monster in the traditional sense; he is a man who has looked at the hypocrisy of the war—a war that demands men be polite while dropping fire on civilians—and chosen to embrace the horror in its purest, most brutal form. The final sequence, cross-cutting the slaughter of a water buffalo with Willard’s assassination of Kurtz, is incredibly disturbing and primal.\n\nApocalypse Now is an exhausting, overwhelming cinematic experience. It is a sprawling, flawed, and absolutely majestic film that captures the insanity of the 20th century better than almost any other work of art. It is the definitive word on the madness of war.",
     }
 ];
 const books = [
@@ -303,20 +358,34 @@ async function main() {
         },
     });
     console.log("Admin user ready:", user.email);
-    await prisma.movieReview.deleteMany({ where: { authorId: user.id } });
-    await prisma.bookReview.deleteMany({ where: { authorId: user.id } });
-    console.log("Cleared previous reviews");
+    console.log("Preserving existing reviews...");
     for (const movie of movies) {
-        const created = await prisma.movieReview.create({
-            data: { ...movie, authorId: user.id, status: 'APPROVED' },
+        const existingMovie = await prisma.movieReview.findFirst({
+            where: { title: movie.title, authorId: user.id }
         });
-        console.log("Movie:", created.title, "->", created.posterUrl);
+        if (!existingMovie) {
+            const created = await prisma.movieReview.create({
+                data: { ...movie, authorId: user.id, status: 'APPROVED' },
+            });
+            console.log("Movie:", created.title, "->", created.posterUrl);
+        }
+        else {
+            console.log("Movie already exists (skipped):", existingMovie.title);
+        }
     }
     for (const book of books) {
-        const created = await prisma.bookReview.create({
-            data: { ...book, authorId: user.id, status: 'APPROVED' },
+        const existingBook = await prisma.bookReview.findFirst({
+            where: { title: book.title, authorId: user.id }
         });
-        console.log("Book:", created.title, "->", created.coverUrl);
+        if (!existingBook) {
+            const created = await prisma.bookReview.create({
+                data: { ...book, authorId: user.id, status: 'APPROVED' },
+            });
+            console.log("Book:", created.title, "->", created.coverUrl);
+        }
+        else {
+            console.log("Book already exists (skipped):", existingBook.title);
+        }
     }
     console.log("\nSeed complete: 6 movies (TMDB CDN) + 6 books (Open Library)");
 }
