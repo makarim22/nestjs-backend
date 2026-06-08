@@ -7,7 +7,7 @@ describe('SchedulerService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [SchedulerService],
-    }).compile();
+    }).useMocker(() => ({})).compile();
 
     service = module.get<SchedulerService>(SchedulerService);
   });
@@ -16,3 +16,4 @@ describe('SchedulerService', () => {
     expect(service).toBeDefined();
   });
 });
+

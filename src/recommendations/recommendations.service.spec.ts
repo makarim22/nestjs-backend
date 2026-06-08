@@ -7,7 +7,7 @@ describe('RecommendationsService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [RecommendationsService],
-    }).compile();
+    }).useMocker(() => ({})).compile();
 
     service = module.get<RecommendationsService>(RecommendationsService);
   });
@@ -16,3 +16,4 @@ describe('RecommendationsService', () => {
     expect(service).toBeDefined();
   });
 });
+

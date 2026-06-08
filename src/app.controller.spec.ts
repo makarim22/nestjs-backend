@@ -9,7 +9,7 @@ describe('AppController', () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [AppService],
-    }).compile();
+    }).useMocker(() => ({})).compile();
 
     appController = app.get<AppController>(AppController);
   });
@@ -20,3 +20,4 @@ describe('AppController', () => {
     });
   });
 });
+

@@ -7,7 +7,7 @@ describe('WebhooksController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [WebhooksController],
-    }).compile();
+    }).useMocker(() => ({})).compile();
 
     controller = module.get<WebhooksController>(WebhooksController);
   });
@@ -16,3 +16,4 @@ describe('WebhooksController', () => {
     expect(controller).toBeDefined();
   });
 });
+

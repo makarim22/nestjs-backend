@@ -17,7 +17,7 @@ describe('RecommendationsController', () => {
           },
         },
       ],
-    }).compile();
+    }).useMocker(() => ({})).compile();
 
     controller = module.get<RecommendationsController>(
       RecommendationsController,
@@ -28,3 +28,4 @@ describe('RecommendationsController', () => {
     expect(controller).toBeDefined();
   });
 });
+
