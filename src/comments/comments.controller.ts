@@ -6,7 +6,15 @@ export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Post()
-  create(@Body() data: { content: string; authorName?: string; movieReviewId?: string; bookReviewId?: string }) {
+  create(
+    @Body()
+    data: {
+      content: string;
+      authorName?: string;
+      movieReviewId?: string;
+      bookReviewId?: string;
+    },
+  ) {
     return this.commentsService.create(data);
   }
 

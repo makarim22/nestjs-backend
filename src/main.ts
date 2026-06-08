@@ -9,11 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
   app.set('trust proxy', 1); // Essential for Google OAuth relative URLs behind a reverse proxy (e.g. Vercel, Render)
-  
+
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
   });
-  
+
   const port = parseInt(process.env.PORT as string, 10) || 3000;
   await app.listen(port, '0.0.0.0');
   console.log(`Application is running on: ${await app.getUrl()}`);

@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Prisma } from '@prisma/client';
@@ -9,10 +19,16 @@ export class MoviesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Body() data: Prisma.MovieReviewUncheckedCreateInput, @Request() req: any) {
+  create(
+    @Body() data: Prisma.MovieReviewUncheckedCreateInput,
+    @Request() req: any,
+  ) {
     data.authorId = req.user.id;
     // Admins/Editors auto-approve, normal users are pending
-    data.status = (req.user.role === 'ADMIN' || req.user.role === 'EDITOR') ? 'APPROVED' : 'PENDING';
+    data.status =
+      req.user.role === 'ADMIN' || req.user.role === 'EDITOR'
+        ? 'APPROVED'
+        : 'PENDING';
     return this.moviesService.create(data);
   }
 
@@ -43,7 +59,11 @@ export class MoviesController {
 
   @Patch(':id/status')
   @UseGuards(JwtAuthGuard)
-  updateStatus(@Param('id') id: string, @Body('status') status: string, @Request() req: any) {
+  updateStatus(
+    @Param('id') id: string,
+    @Body('status') status: string,
+    @Request() req: any,
+  ) {
     if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
       return { message: 'Unauthorized' };
     }

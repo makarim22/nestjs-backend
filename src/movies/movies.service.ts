@@ -6,7 +6,9 @@ import { Prisma, MovieReview } from '@prisma/client';
 export class MoviesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Prisma.MovieReviewUncheckedCreateInput): Promise<MovieReview> {
+  async create(
+    data: Prisma.MovieReviewUncheckedCreateInput,
+  ): Promise<MovieReview> {
     return this.prisma.movieReview.create({ data });
   }
 
@@ -35,15 +37,18 @@ export class MoviesService {
   }
 
   async findOne(id: string): Promise<MovieReview | null> {
-    const movie = await this.prisma.movieReview.findUnique({ 
+    const movie = await this.prisma.movieReview.findUnique({
       where: { id },
-      include: { author: { select: { name: true } } }
+      include: { author: { select: { name: true } } },
     });
     if (!movie) throw new NotFoundException('Movie review not found');
     return movie;
   }
 
-  async update(id: string, data: Prisma.MovieReviewUpdateInput): Promise<MovieReview> {
+  async update(
+    id: string,
+    data: Prisma.MovieReviewUpdateInput,
+  ): Promise<MovieReview> {
     return this.prisma.movieReview.update({
       where: { id },
       data,

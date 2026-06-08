@@ -21,7 +21,7 @@ export class SearchService {
           ],
         },
         take: 5,
-        select: { id: true, title: true, director: true, posterUrl: true }
+        select: { id: true, title: true, director: true, posterUrl: true },
       }),
       this.prisma.bookReview.findMany({
         where: {
@@ -31,24 +31,24 @@ export class SearchService {
           ],
         },
         take: 5,
-        select: { id: true, title: true, author: true, coverUrl: true }
-      })
+        select: { id: true, title: true, author: true, coverUrl: true },
+      }),
     ]);
 
-    const formattedMovies = movies.map(m => ({
+    const formattedMovies = movies.map((m) => ({
       type: 'movies',
       id: m.id,
       title: m.title,
       creator: m.director,
-      image: m.posterUrl
+      image: m.posterUrl,
     }));
 
-    const formattedBooks = books.map(b => ({
+    const formattedBooks = books.map((b) => ({
       type: 'books',
       id: b.id,
       title: b.title,
       creator: b.author,
-      image: b.coverUrl
+      image: b.coverUrl,
     }));
 
     return [...formattedMovies, ...formattedBooks];

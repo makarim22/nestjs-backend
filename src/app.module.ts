@@ -17,7 +17,22 @@ import { RecommendationsModule } from './recommendations/recommendations.module'
 import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, AuthModule, PostsModule, WebhooksModule, UploadsModule, MoviesModule, BooksModule, SchedulerModule, ScheduleModule.forRoot(), CommentsModule, SearchModule, RecommendationsModule, NotificationsModule],
+  imports: [
+    PrismaModule,
+    UsersModule,
+    AuthModule,
+    PostsModule,
+    WebhooksModule,
+    UploadsModule,
+    MoviesModule,
+    BooksModule,
+    SchedulerModule,
+    ScheduleModule.forRoot(),
+    CommentsModule,
+    SearchModule,
+    RecommendationsModule,
+    NotificationsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

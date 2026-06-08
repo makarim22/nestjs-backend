@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Prisma } from '@prisma/client';
@@ -9,7 +19,10 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createPostDto: Omit<Prisma.PostUncheckedCreateInput, 'authorId'>, @Request() req: any) {
+  create(
+    @Body() createPostDto: Omit<Prisma.PostUncheckedCreateInput, 'authorId'>,
+    @Request() req: any,
+  ) {
     return this.postsService.create({
       ...createPostDto,
       authorId: req.user.id,
@@ -28,7 +41,10 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: Prisma.PostUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePostDto: Prisma.PostUpdateInput,
+  ) {
     return this.postsService.update(id, updatePostDto);
   }
 
@@ -38,4 +54,3 @@ export class PostsController {
     return this.postsService.remove(id);
   }
 }
-

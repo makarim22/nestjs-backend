@@ -6,7 +6,9 @@ import { Prisma, BookReview } from '@prisma/client';
 export class BooksService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Prisma.BookReviewUncheckedCreateInput): Promise<BookReview> {
+  async create(
+    data: Prisma.BookReviewUncheckedCreateInput,
+  ): Promise<BookReview> {
     return this.prisma.bookReview.create({ data });
   }
 
@@ -35,15 +37,18 @@ export class BooksService {
   }
 
   async findOne(id: string): Promise<BookReview | null> {
-    const book = await this.prisma.bookReview.findUnique({ 
+    const book = await this.prisma.bookReview.findUnique({
       where: { id },
-      include: { userAuthor: { select: { name: true } } }
+      include: { userAuthor: { select: { name: true } } },
     });
     if (!book) throw new NotFoundException('Book review not found');
     return book;
   }
 
-  async update(id: string, data: Prisma.BookReviewUpdateInput): Promise<BookReview> {
+  async update(
+    id: string,
+    data: Prisma.BookReviewUpdateInput,
+  ): Promise<BookReview> {
     return this.prisma.bookReview.update({
       where: { id },
       data,

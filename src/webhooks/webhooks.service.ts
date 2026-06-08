@@ -23,7 +23,11 @@ export class WebhooksService {
         await fetch(webhook.url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ event: 'post_status_changed', postId, status }),
+          body: JSON.stringify({
+            event: 'post_status_changed',
+            postId,
+            status,
+          }),
         });
       } catch (error) {
         console.error(`Failed to dispatch to webhook ${webhook.url}`, error);
@@ -31,4 +35,3 @@ export class WebhooksService {
     }
   }
 }
-

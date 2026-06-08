@@ -4,7 +4,9 @@ import { OptionalJwtAuthGuard } from '../auth/optional-jwt-auth.guard';
 
 @Controller('recommendations')
 export class RecommendationsController {
-  constructor(private readonly recommendationsService: RecommendationsService) {}
+  constructor(
+    private readonly recommendationsService: RecommendationsService,
+  ) {}
 
   @UseGuards(OptionalJwtAuthGuard)
   @Get()

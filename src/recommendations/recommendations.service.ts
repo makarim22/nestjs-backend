@@ -80,21 +80,30 @@ export class RecommendationsService {
       where: postWhere,
       orderBy: { createdAt: 'desc' },
       take: 10,
-      include: { tags: true, author: { select: { name: true, avatarUrl: true } } },
+      include: {
+        tags: true,
+        author: { select: { name: true, avatarUrl: true } },
+      },
     });
 
     let movies = await this.prisma.movieReview.findMany({
       where: movieWhere,
       orderBy: [{ rating: 'desc' }, { createdAt: 'desc' }],
       take: 10,
-      include: { tags: true, author: { select: { name: true, avatarUrl: true } } },
+      include: {
+        tags: true,
+        author: { select: { name: true, avatarUrl: true } },
+      },
     });
 
     let books = await this.prisma.bookReview.findMany({
       where: bookWhere,
       orderBy: [{ rating: 'desc' }, { createdAt: 'desc' }],
       take: 10,
-      include: { tags: true, userAuthor: { select: { name: true, avatarUrl: true } } },
+      include: {
+        tags: true,
+        userAuthor: { select: { name: true, avatarUrl: true } },
+      },
     });
 
     // 3. Fallback logic if personalized feed is too small
@@ -102,38 +111,69 @@ export class RecommendationsService {
     if (topTags.length > 0 && totalItems < 5) {
       // Fetch generic top items to pad the list
       const genericPosts = await this.prisma.post.findMany({
-        where: { status: 'PUBLISHED', id: { notIn: [...excludePostIds, ...posts.map(p => p.id)] } },
+        where: {
+          status: 'PUBLISHED',
+          id: { notIn: [...excludePostIds, ...posts.map((p) => p.id)] },
+        },
         orderBy: { createdAt: 'desc' },
         take: 5,
-        include: { tags: true, author: { select: { name: true, avatarUrl: true } } },
+        include: {
+          tags: true,
+          author: { select: { name: true, avatarUrl: true } },
+        },
       });
       posts = [...posts, ...genericPosts];
 
       const genericMovies = await this.prisma.movieReview.findMany({
-        where: { status: 'APPROVED', id: { notIn: [...excludeMovieIds, ...movies.map(m => m.id)] } },
+        where: {
+          status: 'APPROVED',
+          id: { notIn: [...excludeMovieIds, ...movies.map((m) => m.id)] },
+        },
         orderBy: [{ rating: 'desc' }, { createdAt: 'desc' }],
         take: 5,
-        include: { tags: true, author: { select: { name: true, avatarUrl: true } } },
+        include: {
+          tags: true,
+          author: { select: { name: true, avatarUrl: true } },
+        },
       });
       movies = [...movies, ...genericMovies];
 
       const genericBooks = await this.prisma.bookReview.findMany({
-        where: { status: 'APPROVED', id: { notIn: [...excludeBookIds, ...books.map(b => b.id)] } },
+        where: {
+          status: 'APPROVED',
+          id: { notIn: [...excludeBookIds, ...books.map((b) => b.id)] },
+        },
         orderBy: [{ rating: 'desc' }, { createdAt: 'desc' }],
         take: 5,
-        include: { tags: true, userAuthor: { select: { name: true, avatarUrl: true } } },
+        include: {
+          tags: true,
+          userAuthor: { select: { name: true, avatarUrl: true } },
+        },
       });
       books = [...books, ...genericBooks];
     }
 
     // 4. Normalize and Score
-    const normalizedPosts = posts.map(p => ({ ...p, type: 'post', score: this.calculateScore(p, topTags) }));
-    const normalizedMovies = movies.map(m => ({ ...m, type: 'movie', score: this.calculateScore(m, topTags) }));
-    
+    const normalizedPosts = posts.map((p) => ({
+      ...p,
+      type: 'post',
+      score: this.calculateScore(p, topTags),
+    }));
+    const normalizedMovies = movies.map((m) => ({
+      ...m,
+      type: 'movie',
+      score: this.calculateScore(m, topTags),
+    }));
+
     // bookReview uses 'userAuthor', normalize to 'author' for consistency
-    const normalizedBooks = books.map(b => {
+    const normalizedBooks = books.map((b) => {
       const { userAuthor, ...rest } = b;
-      return { ...rest, author: userAuthor, type: 'book', score: this.calculateScore(b, topTags) };
+      return {
+        ...rest,
+        author: userAuthor,
+        type: 'book',
+        score: this.calculateScore(b, topTags),
+      };
     });
 
     // 5. Combine and Sort by score
@@ -146,10 +186,12 @@ export class RecommendationsService {
 
   private calculateScore(item: any, topTags: string[]): number {
     let score = 0;
-    
+
     // Tag match score
     if (item.tags && topTags.length > 0) {
-      const matchCount = item.tags.filter((t: any) => topTags.includes(t.name)).length;
+      const matchCount = item.tags.filter((t: any) =>
+        topTags.includes(t.name),
+      ).length;
       score += matchCount * 10;
     }
 
@@ -158,12 +200,15 @@ export class RecommendationsService {
       score += item.rating * 2; // up to 20 pts
     } else {
       // Posts don't have ratings, give them a baseline to compete fairly
-      score += 15; 
+      score += 15;
     }
 
     // Recency score (newer items get slight boost)
-    const ageInDays = (new Date().getTime() - new Date(item.createdAt).getTime()) / (1000 * 60 * 60 * 24);
-    if (ageInDays < 7) score += 5; // less than a week
+    const ageInDays =
+      (new Date().getTime() - new Date(item.createdAt).getTime()) /
+      (1000 * 60 * 60 * 24);
+    if (ageInDays < 7)
+      score += 5; // less than a week
     else if (ageInDays < 30) score += 2; // less than a month
 
     // Randomize slightly so feed isn't entirely static

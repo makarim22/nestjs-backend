@@ -6,6 +6,6 @@ import { WebhooksModule } from '../webhooks/webhooks.module';
 @Module({
   imports: [WebhooksModule],
   providers: [PostsService],
-  controllers: [PostsController]
+  controllers: [PostsController],
 })
 export class PostsModule {}

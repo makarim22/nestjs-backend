@@ -9,14 +9,19 @@ export class NotificationsService {
     private gateway: NotificationsGateway,
   ) {}
 
-  async createNotification(data: { userId: string, type: string, message: string, link?: string }) {
+  async createNotification(data: {
+    userId: string;
+    type: string;
+    message: string;
+    link?: string;
+  }) {
     const notification = await this.prisma.notification.create({
       data: {
         userId: data.userId,
         type: data.type,
         message: data.message,
         link: data.link,
-      }
+      },
     });
 
     // Emit via WebSocket to the specific user's room
@@ -36,14 +41,14 @@ export class NotificationsService {
   async markAsRead(userId: string, notificationId: string) {
     return this.prisma.notification.update({
       where: { id: notificationId, userId },
-      data: { isRead: true }
+      data: { isRead: true },
     });
   }
 
   async markAllAsRead(userId: string) {
     return this.prisma.notification.updateMany({
       where: { userId, isRead: false },
-      data: { isRead: true }
+      data: { isRead: true },
     });
   }
 }
