@@ -22,6 +22,7 @@ model User {
   bookReviews  BookReview[]
   savedMovies  SavedMovie[] @relation("UserSavedMovies")
   savedBooks   SavedBook[]  @relation("UserSavedBooks")
+  notifications Notification[] @relation("UserNotifications")
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -129,4 +130,15 @@ model SavedBook {
   createdAt    DateTime     @default(now())
 
   @@unique([userId, bookReviewId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // "COMMENT", "REVIEW_APPROVED", etc.
+  message   String
+  link      String?  // Optional path e.g. "/review/movies/123"
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
 }

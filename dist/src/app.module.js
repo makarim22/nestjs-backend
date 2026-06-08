@@ -23,12 +23,13 @@ const schedule_1 = require("@nestjs/schedule");
 const comments_module_1 = require("./comments/comments.module");
 const search_module_1 = require("./search/search.module");
 const recommendations_module_1 = require("./recommendations/recommendations.module");
+const notifications_module_1 = require("./notifications/notifications.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, posts_module_1.PostsModule, webhooks_module_1.WebhooksModule, uploads_module_1.UploadsModule, movies_module_1.MoviesModule, books_module_1.BooksModule, scheduler_module_1.SchedulerModule, schedule_1.ScheduleModule.forRoot(), comments_module_1.CommentsModule, search_module_1.SearchModule, recommendations_module_1.RecommendationsModule],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, posts_module_1.PostsModule, webhooks_module_1.WebhooksModule, uploads_module_1.UploadsModule, movies_module_1.MoviesModule, books_module_1.BooksModule, scheduler_module_1.SchedulerModule, schedule_1.ScheduleModule.forRoot(), comments_module_1.CommentsModule, search_module_1.SearchModule, recommendations_module_1.RecommendationsModule, notifications_module_1.NotificationsModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

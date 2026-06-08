@@ -14,9 +14,10 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { CommentsModule } from './comments/comments.module';
 import { SearchModule } from './search/search.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, AuthModule, PostsModule, WebhooksModule, UploadsModule, MoviesModule, BooksModule, SchedulerModule, ScheduleModule.forRoot(), CommentsModule, SearchModule, RecommendationsModule],
+  imports: [PrismaModule, UsersModule, AuthModule, PostsModule, WebhooksModule, UploadsModule, MoviesModule, BooksModule, SchedulerModule, ScheduleModule.forRoot(), CommentsModule, SearchModule, RecommendationsModule, NotificationsModule],
   controllers: [AppController],
   providers: [AppService],
 })
