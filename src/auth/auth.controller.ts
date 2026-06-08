@@ -1,4 +1,16 @@
-import { Controller, Post, Body, UseGuards, Request, HttpCode, HttpStatus, UnauthorizedException, Get, Res, Logger } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Request,
+  HttpCode,
+  HttpStatus,
+  UnauthorizedException,
+  Get,
+  Res,
+  Logger,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 
@@ -23,7 +35,7 @@ export class AuthController {
 
   @Get('google/login')
   @UseGuards(AuthGuard('google'))
-  async googleAuth(@Request() req: any) {
+  async googleAuth() {
     // Initiates the Google OAuth2 login flow
   }
 
@@ -33,14 +45,21 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Request() req: any, @Res() res: any) {
     try {
-      this.logger.log('Google callback hit. User from passport: ' + JSON.stringify(req.user));
-      const result = await this.authService.login((req as any).user);
+      this.logger.log(
+        'Google callback hit. User from passport: ' + JSON.stringify(req.user),
+      );
+      const result = await this.authService.login(req.user);
       const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
       res.redirect(`${frontendUrl}/auth/callback?token=${result.access_token}`);
     } catch (error: any) {
-      this.logger.error('Google OAuth callback failed: ' + error.message, error.stack);
+      this.logger.error(
+        'Google OAuth callback failed: ' + error.message,
+        error.stack,
+      );
       const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-      res.redirect(`${frontendUrl}/login?error=oauth_failed&reason=${encodeURIComponent(error.message)}`);
+      res.redirect(
+        `${frontendUrl}/login?error=oauth_failed&reason=${encodeURIComponent(error.message)}`,
+      );
     }
   }
 }
