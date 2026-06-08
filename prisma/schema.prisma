@@ -41,9 +41,11 @@ model Post {
 }
 
 model Tag {
-  id    String @id @default(uuid())
-  name  String @unique
-  posts Post[]
+  id           String        @id @default(uuid())
+  name         String        @unique
+  posts        Post[]
+  movieReviews MovieReview[]
+  bookReviews  BookReview[]
 }
 
 model Webhook {
@@ -70,6 +72,7 @@ model MovieReview {
   author      User         @relation(fields: [authorId], references: [id])
   comments    Comment[]
   savedBy     SavedMovie[]
+  tags        Tag[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -90,6 +93,7 @@ model BookReview {
   userAuthor  User         @relation(fields: [authorId], references: [id])
   comments    Comment[]
   savedBy     SavedBook[]
+  tags        Tag[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
