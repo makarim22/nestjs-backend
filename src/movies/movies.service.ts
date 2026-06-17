@@ -16,8 +16,35 @@ export class MoviesService {
     const movie = await this.prisma.movieReview.create({ data });
     if (movie.status === 'APPROVED') {
       await this.badgesService.checkReviewBadges(movie.authorId);
+      await this.checkAndFulfillBounty(movie);
     }
     return movie;
+  }
+
+  private async checkAndFulfillBounty(movie: MovieReview) {
+    if (movie.status === 'APPROVED') {
+      const activeBounty = await this.prisma.bounty.findFirst({
+        where: {
+          title: movie.title,
+          type: 'MOVIE',
+          status: 'CLAIMED',
+          claimedById: movie.authorId
+        }
+      });
+
+      if (activeBounty) {
+        await this.prisma.bounty.update({
+          where: { id: activeBounty.id },
+          data: {
+            status: 'COMPLETED',
+            completedById: movie.authorId,
+            completedAt: new Date(),
+            movieReviewId: movie.id
+          }
+        });
+        await this.badgesService.checkBountyHunterBadge(movie.authorId);
+      }
+    }
   }
 
   async findAll(): Promise<MovieReview[]> {
@@ -63,6 +90,7 @@ export class MoviesService {
     });
     if (movie.status === 'APPROVED') {
       await this.badgesService.checkReviewBadges(movie.authorId);
+      await this.checkAndFulfillBounty(movie);
     }
     return movie;
   }

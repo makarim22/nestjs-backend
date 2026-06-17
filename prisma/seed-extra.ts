@@ -1490,6 +1490,12 @@ const initialBadges = [
     description: "Received 5 upvotes on a single comment.",
     icon: "🎙️",
     criteria: "INFORMANT"
+  },
+  {
+    name: "Bounty Hunter",
+    description: "Completed an open bounty.",
+    icon: "🎯",
+    criteria: "BOUNTY_HUNTER"
   }
 ]
 

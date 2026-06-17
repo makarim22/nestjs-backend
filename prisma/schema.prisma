@@ -28,6 +28,8 @@ model User {
   followers    Follows[] @relation("following")
   following    Follows[] @relation("follower")
   badges       UserBadge[]
+  claimedBounties   Bounty[] @relation("ClaimedBounties")
+  completedBounties Bounty[] @relation("CompletedBounties")
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -80,6 +82,7 @@ model MovieReview {
   savedBy     SavedMovie[]
   tags        Tag[]
   curatedListItems CuratedListItem[]
+  bounty      Bounty?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -102,6 +105,7 @@ model BookReview {
   savedBy     SavedBook[]
   tags        Tag[]
   curatedListItems CuratedListItem[]
+  bounty      Bounty?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -225,4 +229,33 @@ model UserBadge {
   awardedAt DateTime @default(now())
 
   @@unique([userId, badgeId])
+}
+
+model Bounty {
+  id            String   @id @default(uuid())
+  title         String   // The media title wanted
+  type          String   // "MOVIE" or "BOOK"
+  description   String   // Instructions/context from admin
+  status        String   @default("OPEN") // OPEN, CLAIMED, COMPLETED
+  rewardPoints  Int      @default(50)
+  
+  // Claiming
+  claimedById   String?
+  claimedBy     User?    @relation("ClaimedBounties", fields: [claimedById], references: [id], onDelete: SetNull)
+  claimedAt     DateTime?
+  
+  // Completion
+  completedById String?
+  completedBy   User?    @relation("CompletedBounties", fields: [completedById], references: [id], onDelete: SetNull)
+  completedAt   DateTime?
+  
+  // Link to the fulfilling review
+  movieReviewId String?  @unique
+  movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: SetNull)
+  
+  bookReviewId  String?  @unique
+  bookReview    BookReview? @relation(fields: [bookReviewId], references: [id], onDelete: SetNull)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

@@ -50,4 +50,11 @@ export class BadgesService {
       await this.awardBadge(userId, 'INFORMANT');
     }
   }
+
+  async checkBountyHunterBadge(userId: string) {
+    const completedBounties = await this.prisma.bounty.count({ where: { completedById: userId } });
+    if (completedBounties >= 1) {
+      await this.awardBadge(userId, 'BOUNTY_HUNTER');
+    }
+  }
 }

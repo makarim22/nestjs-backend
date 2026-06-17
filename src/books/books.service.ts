@@ -16,8 +16,35 @@ export class BooksService {
     const book = await this.prisma.bookReview.create({ data });
     if (book.status === 'APPROVED') {
       await this.badgesService.checkReviewBadges(book.authorId);
+      await this.checkAndFulfillBounty(book);
     }
     return book;
+  }
+
+  private async checkAndFulfillBounty(book: BookReview) {
+    if (book.status === 'APPROVED') {
+      const activeBounty = await this.prisma.bounty.findFirst({
+        where: {
+          title: book.title,
+          type: 'BOOK',
+          status: 'CLAIMED',
+          claimedById: book.authorId
+        }
+      });
+
+      if (activeBounty) {
+        await this.prisma.bounty.update({
+          where: { id: activeBounty.id },
+          data: {
+            status: 'COMPLETED',
+            completedById: book.authorId,
+            completedAt: new Date(),
+            bookReviewId: book.id
+          }
+        });
+        await this.badgesService.checkBountyHunterBadge(book.authorId);
+      }
+    }
   }
 
   async findAll(): Promise<BookReview[]> {
@@ -63,6 +90,7 @@ export class BooksService {
     });
     if (book.status === 'APPROVED') {
       await this.badgesService.checkReviewBadges(book.authorId);
+      await this.checkAndFulfillBounty(book);
     }
     return book;
   }
