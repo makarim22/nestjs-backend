@@ -27,6 +27,7 @@ model User {
   curatedLists CuratedList[]
   followers    Follows[] @relation("following")
   following    Follows[] @relation("follower")
+  badges       UserBadge[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -204,4 +205,24 @@ model Follows {
   createdAt   DateTime @default(now())
 
   @@id([followerId, followingId])
+}
+
+model Badge {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  icon        String   // Emoji or string
+  criteria    String   // Identifier like 'FIRST_REVIEW'
+  users       UserBadge[]
+}
+
+model UserBadge {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badgeId   String
+  badge     Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  awardedAt DateTime @default(now())
+
+  @@unique([userId, badgeId])
 }

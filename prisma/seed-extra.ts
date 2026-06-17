@@ -1472,6 +1472,27 @@ const books = [
   }
 ]
 
+const initialBadges = [
+  {
+    name: "First Case",
+    description: "Filed your first review.",
+    icon: "🕵️‍♂️",
+    criteria: "FIRST_REVIEW"
+  },
+  {
+    name: "The Networker",
+    description: "Followed 5 other agents.",
+    icon: "🕸️",
+    criteria: "NETWORKER"
+  },
+  {
+    name: "The Informant",
+    description: "Received 5 upvotes on a single comment.",
+    icon: "🎙️",
+    criteria: "INFORMANT"
+  }
+]
+
 async function main() {
   console.log("=== Extra Seed: 50 Movies + 50 Books ===\n")
 
@@ -1530,9 +1551,20 @@ async function main() {
     }
   }
 
+  let badgeCount = 0
+  for (const badge of initialBadges) {
+    await prisma.badge.upsert({
+      where: { name: badge.name },
+      update: {},
+      create: badge,
+    })
+    badgeCount++
+  }
+
   console.log(`\n=== Done ===`)
   console.log(`Movies: ${movieCount} added, ${movieSkipped} skipped`)
   console.log(`Books: ${bookCount} added, ${bookSkipped} skipped`)
+  console.log(`Badges: ${badgeCount} upserted`)
 }
 
 main()

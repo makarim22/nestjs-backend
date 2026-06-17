@@ -1,15 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, BookReview } from '@prisma/client';
+import { BadgesService } from '../badges/badges.service';
 
 @Injectable()
 export class BooksService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private badgesService: BadgesService
+  ) {}
 
   async create(
     data: Prisma.BookReviewUncheckedCreateInput,
   ): Promise<BookReview> {
-    return this.prisma.bookReview.create({ data });
+    const book = await this.prisma.bookReview.create({ data });
+    if (book.status === 'APPROVED') {
+      await this.badgesService.checkReviewBadges(book.authorId);
+    }
+    return book;
   }
 
   async findAll(): Promise<BookReview[]> {
@@ -49,10 +57,14 @@ export class BooksService {
     id: string,
     data: Prisma.BookReviewUpdateInput,
   ): Promise<BookReview> {
-    return this.prisma.bookReview.update({
+    const book = await this.prisma.bookReview.update({
       where: { id },
       data,
     });
+    if (book.status === 'APPROVED') {
+      await this.badgesService.checkReviewBadges(book.authorId);
+    }
+    return book;
   }
 
   async remove(id: string): Promise<BookReview> {

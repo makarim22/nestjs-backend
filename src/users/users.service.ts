@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
+import { BadgesService } from '../badges/badges.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private badgesService: BadgesService
+  ) {}
 
   async findOne(email: string): Promise<User | null> {
     return this.prisma.user.findUnique({
@@ -132,6 +136,10 @@ export class UsersService {
         avatarUrl: true,
         role: true,
         createdAt: true,
+        badges: {
+          include: { badge: true },
+          orderBy: { awardedAt: 'desc' }
+        },
         _count: {
           select: { followers: true, following: true }
         }
@@ -186,6 +194,7 @@ export class UsersService {
       await this.prisma.follows.create({
         data: { followerId, followingId }
       });
+      await this.badgesService.checkNetworkerBadge(followerId);
       return { status: 'followed' };
     }
   }

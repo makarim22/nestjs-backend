@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 import { NotificationsService } from '../notifications/notifications.service';
+import { BadgesService } from '../badges/badges.service';
 
 @Injectable()
 export class CommentsService {
   constructor(
     private prisma: PrismaService,
     private notifications: NotificationsService,
+    private badgesService: BadgesService
   ) {}
 
   async create(data: any) {
@@ -122,6 +124,9 @@ export class CommentsService {
           value,
         },
       });
+      if (value === 1) {
+        await this.badgesService.checkInformantBadge(userId);
+      }
     }
 
     const comment = await this.prisma.comment.findUnique({

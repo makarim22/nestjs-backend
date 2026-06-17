@@ -1,15 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, MovieReview } from '@prisma/client';
+import { BadgesService } from '../badges/badges.service';
 
 @Injectable()
 export class MoviesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private badgesService: BadgesService
+  ) {}
 
   async create(
     data: Prisma.MovieReviewUncheckedCreateInput,
   ): Promise<MovieReview> {
-    return this.prisma.movieReview.create({ data });
+    const movie = await this.prisma.movieReview.create({ data });
+    if (movie.status === 'APPROVED') {
+      await this.badgesService.checkReviewBadges(movie.authorId);
+    }
+    return movie;
   }
 
   async findAll(): Promise<MovieReview[]> {
@@ -49,10 +57,14 @@ export class MoviesService {
     id: string,
     data: Prisma.MovieReviewUpdateInput,
   ): Promise<MovieReview> {
-    return this.prisma.movieReview.update({
+    const movie = await this.prisma.movieReview.update({
       where: { id },
       data,
     });
+    if (movie.status === 'APPROVED') {
+      await this.badgesService.checkReviewBadges(movie.authorId);
+    }
+    return movie;
   }
 
   async remove(id: string): Promise<MovieReview> {
