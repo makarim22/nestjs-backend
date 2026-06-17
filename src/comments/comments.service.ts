@@ -43,17 +43,95 @@ export class CommentsService {
     return comment;
   }
 
-  async findAllByMovie(movieId: string) {
-    return this.prisma.comment.findMany({
-      where: { movieReviewId: movieId },
+  async findAllByMovie(movieId: string, userId?: string) {
+    const comments = await this.prisma.comment.findMany({
+      where: { movieReviewId: movieId, parentId: null },
+      include: {
+        replies: {
+          include: { votes: true },
+          orderBy: { createdAt: 'asc' },
+        },
+        votes: true,
+      },
       orderBy: { createdAt: 'desc' },
+    });
+    return this.formatComments(comments, userId);
+  }
+
+  async findAllByBook(bookId: string, userId?: string) {
+    const comments = await this.prisma.comment.findMany({
+      where: { bookReviewId: bookId, parentId: null },
+      include: {
+        replies: {
+          include: { votes: true },
+          orderBy: { createdAt: 'asc' },
+        },
+        votes: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+    return this.formatComments(comments, userId);
+  }
+
+  private formatComments(comments: any[], userId?: string) {
+    return comments.map((c) => {
+      const score = c.votes ? c.votes.reduce((acc: number, v: any) => acc + v.value, 0) : 0;
+      const userVote = userId && c.votes ? c.votes.find((v: any) => v.userId === userId)?.value || 0 : 0;
+
+      const replies = c.replies ? c.replies.map((r: any) => {
+        const rScore = r.votes ? r.votes.reduce((acc: number, v: any) => acc + v.value, 0) : 0;
+        const rUserVote = userId && r.votes ? r.votes.find((v: any) => v.userId === userId)?.value || 0 : 0;
+        return {
+          id: r.id,
+          content: r.content,
+          authorName: r.authorName,
+          createdAt: r.createdAt,
+          parentId: r.parentId,
+          score: rScore,
+          userVote: rUserVote,
+        };
+      }) : [];
+
+      return {
+        id: c.id,
+        content: c.content,
+        authorName: c.authorName,
+        createdAt: c.createdAt,
+        parentId: c.parentId,
+        score,
+        userVote,
+        replies,
+      };
     });
   }
 
-  async findAllByBook(bookId: string) {
-    return this.prisma.comment.findMany({
-      where: { bookReviewId: bookId },
-      orderBy: { createdAt: 'desc' },
+  async vote(commentId: string, userId: string, value: number) {
+    if (value === 0) {
+      await this.prisma.commentVote.deleteMany({
+        where: { commentId, userId },
+      });
+    } else {
+      await this.prisma.commentVote.upsert({
+        where: {
+          userId_commentId: { userId, commentId },
+        },
+        update: { value },
+        create: {
+          userId,
+          commentId,
+          value,
+        },
+      });
+    }
+
+    const comment = await this.prisma.comment.findUnique({
+      where: { id: commentId },
+      include: { votes: true },
     });
+    
+    if (!comment) return { score: 0, userVote: 0 };
+    
+    const score = comment.votes.reduce((acc, v) => acc + v.value, 0);
+    return { score, userVote: value };
   }
 }

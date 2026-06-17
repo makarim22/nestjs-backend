@@ -23,6 +23,7 @@ model User {
   savedMovies  SavedMovie[] @relation("UserSavedMovies")
   savedBooks   SavedBook[]  @relation("UserSavedBooks")
   notifications Notification[] @relation("UserNotifications")
+  commentVotes CommentVote[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -108,6 +109,10 @@ model Comment {
   movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
   bookReview    BookReview?  @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
   createdAt     DateTime     @default(now())
+  parentId      String?
+  parent        Comment?     @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       Comment[]    @relation("CommentReplies")
+  votes         CommentVote[]
 }
 
 model SavedMovie {
@@ -141,4 +146,16 @@ model Notification {
   link      String?  // Optional path e.g. "/review/movies/123"
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+model CommentVote {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  commentId String
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  value     Int      // 1 or -1
+  createdAt DateTime @default(now())
+
+  @@unique([userId, commentId])
 }
