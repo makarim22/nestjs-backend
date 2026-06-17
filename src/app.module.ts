@@ -15,6 +15,7 @@ import { CommentsModule } from './comments/comments.module';
 import { SearchModule } from './search/search.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { ListsModule } from './lists/lists.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     SearchModule,
     RecommendationsModule,
     NotificationsModule,
+    ListsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -24,6 +24,7 @@ model User {
   savedBooks   SavedBook[]  @relation("UserSavedBooks")
   notifications Notification[] @relation("UserNotifications")
   commentVotes CommentVote[]
+  curatedLists CuratedList[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -75,6 +76,7 @@ model MovieReview {
   comments    Comment[]
   savedBy     SavedMovie[]
   tags        Tag[]
+  curatedListItems CuratedListItem[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -96,6 +98,7 @@ model BookReview {
   comments    Comment[]
   savedBy     SavedBook[]
   tags        Tag[]
+  curatedListItems CuratedListItem[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -158,4 +161,35 @@ model CommentVote {
   createdAt DateTime @default(now())
 
   @@unique([userId, commentId])
+}
+
+model CuratedList {
+  id          String   @id @default(uuid())
+  title       String
+  description String   // Overview of the list (Markdown supported)
+  type        String   // "MOVIE" or "BOOK"
+  status      String   @default("DRAFT") // "DRAFT" or "PUBLISHED"
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  coverUrl    String?
+  items       CuratedListItem[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CuratedListItem {
+  id            String       @id @default(uuid())
+  listId        String
+  list          CuratedList  @relation(fields: [listId], references: [id], onDelete: Cascade)
+  movieReviewId String?
+  movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
+  bookReviewId  String?
+  bookReview    BookReview?  @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
+  order         Int          // To determine ranking/sequence
+  blurb         String       // Editorial reason for inclusion (Markdown supported)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@unique([listId, movieReviewId])
+  @@unique([listId, bookReviewId])
 }
