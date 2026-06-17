@@ -30,6 +30,9 @@ model User {
   badges       UserBadge[]
   claimedBounties   Bounty[] @relation("ClaimedBounties")
   completedBounties Bounty[] @relation("CompletedBounties")
+  syndicateMembers  SyndicateMember[]
+  syndicateMessages SyndicateMessage[]
+  syndicateTargets  SyndicateTarget[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -259,3 +262,51 @@ model Bounty {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+model Syndicate {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  avatarUrl   String?
+  creatorId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  members     SyndicateMember[]
+  messages    SyndicateMessage[]
+  targets     SyndicateTarget[]
+}
+
+model SyndicateMember {
+  id          String    @id @default(uuid())
+  syndicateId String
+  syndicate   Syndicate @relation(fields: [syndicateId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role        String    @default("MEMBER") // LEADER, MEMBER
+  joinedAt    DateTime  @default(now())
+
+  @@unique([syndicateId, userId])
+}
+
+model SyndicateMessage {
+  id          String    @id @default(uuid())
+  content     String
+  syndicateId String
+  syndicate   Syndicate @relation(fields: [syndicateId], references: [id], onDelete: Cascade)
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+}
+
+model SyndicateTarget {
+  id          String    @id @default(uuid())
+  syndicateId String
+  syndicate   Syndicate @relation(fields: [syndicateId], references: [id], onDelete: Cascade)
+  title       String
+  type        String    // MOVIE or BOOK
+  addedById   String
+  addedBy     User      @relation(fields: [addedById], references: [id], onDelete: Cascade)
+  status      String    @default("ACTIVE") // ACTIVE, INVESTIGATED
+  createdAt   DateTime  @default(now())
+}
+

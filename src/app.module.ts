@@ -18,6 +18,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { ListsModule } from './lists/lists.module';
 import { BadgesModule } from './badges/badges.module';
 import { BountiesModule } from './bounties/bounties.module';
+import { SyndicatesModule } from './syndicates/syndicates.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { BountiesModule } from './bounties/bounties.module';
     ListsModule,
     BadgesModule,
     BountiesModule,
+    SyndicatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
