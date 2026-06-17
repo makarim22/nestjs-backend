@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { OptionalJwtAuthGuard } from '../auth/optional-jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -39,5 +40,24 @@ export class UsersController {
       console.error('ERROR IN toggleSavedBook:', err);
       throw err;
     }
+  }
+
+  @UseGuards(OptionalJwtAuthGuard)
+  @Get(':id/dossier')
+  async getDossier(@Request() req: any, @Param('id') id: string) {
+    const currentUserId = req.user?.id;
+    return this.usersService.getDossier(id, currentUserId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post(':id/follow')
+  async toggleFollow(@Request() req: any, @Param('id') id: string) {
+    return this.usersService.toggleFollow(req.user.id, id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me/feed')
+  async getFeed(@Request() req: any) {
+    return this.usersService.getFeed(req.user.id);
   }
 }

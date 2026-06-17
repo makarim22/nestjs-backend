@@ -16,7 +16,7 @@ export class MoviesService {
     return this.prisma.movieReview.findMany({
       where: { status: 'APPROVED' },
       orderBy: { watchDate: 'desc' },
-      include: { author: { select: { name: true } } },
+      include: { author: { select: { id: true, name: true } } },
     });
   }
 
@@ -24,7 +24,7 @@ export class MoviesService {
     return this.prisma.movieReview.findMany({
       where: { status: 'PENDING' },
       orderBy: { createdAt: 'desc' },
-      include: { author: { select: { name: true } } },
+      include: { author: { select: { id: true, name: true } } },
     });
   }
 
@@ -32,14 +32,14 @@ export class MoviesService {
     return this.prisma.movieReview.findMany({
       where: { authorId },
       orderBy: { createdAt: 'desc' },
-      include: { author: { select: { name: true } } },
+      include: { author: { select: { id: true, name: true } } },
     });
   }
 
   async findOne(id: string): Promise<MovieReview | null> {
     const movie = await this.prisma.movieReview.findUnique({
       where: { id },
-      include: { author: { select: { name: true } } },
+      include: { author: { select: { id: true, name: true } } },
     });
     if (!movie) throw new NotFoundException('Movie review not found');
     return movie;

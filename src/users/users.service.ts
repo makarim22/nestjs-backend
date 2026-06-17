@@ -122,4 +122,104 @@ export class UsersService {
       return { status: 'added' };
     }
   }
+
+  async getDossier(userId: string, currentUserId?: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        avatarUrl: true,
+        role: true,
+        createdAt: true,
+        _count: {
+          select: { followers: true, following: true }
+        }
+      }
+    });
+
+    if (!user) return null;
+
+    let isFollowing = false;
+    if (currentUserId) {
+      const follow = await this.prisma.follows.findUnique({
+        where: {
+          followerId_followingId: { followerId: currentUserId, followingId: userId }
+        }
+      });
+      isFollowing = !!follow;
+    }
+
+    const movieReviews = await this.prisma.movieReview.findMany({
+      where: { authorId: userId, status: 'APPROVED' },
+      orderBy: { createdAt: 'desc' },
+      take: 10
+    });
+
+    const bookReviews = await this.prisma.bookReview.findMany({
+      where: { authorId: userId, status: 'APPROVED' },
+      orderBy: { createdAt: 'desc' },
+      take: 10
+    });
+
+    return {
+      ...user,
+      isFollowing,
+      movieReviews,
+      bookReviews
+    };
+  }
+
+  async toggleFollow(followerId: string, followingId: string) {
+    if (followerId === followingId) throw new Error("Cannot follow yourself");
+
+    const existing = await this.prisma.follows.findUnique({
+      where: { followerId_followingId: { followerId, followingId } }
+    });
+
+    if (existing) {
+      await this.prisma.follows.delete({
+        where: { followerId_followingId: { followerId, followingId } }
+      });
+      return { status: 'unfollowed' };
+    } else {
+      await this.prisma.follows.create({
+        data: { followerId, followingId }
+      });
+      return { status: 'followed' };
+    }
+  }
+
+  async getFeed(userId: string) {
+    const following = await this.prisma.follows.findMany({
+      where: { followerId: userId },
+      select: { followingId: true }
+    });
+    
+    const followingIds = following.map(f => f.followingId);
+
+    if (followingIds.length === 0) return [];
+
+    const movieReviews = await this.prisma.movieReview.findMany({
+      where: { authorId: { in: followingIds }, status: 'APPROVED' },
+      include: { author: { select: { id: true, name: true, avatarUrl: true } } },
+      orderBy: { createdAt: 'desc' },
+      take: 20
+    });
+
+    const bookReviews = await this.prisma.bookReview.findMany({
+      where: { authorId: { in: followingIds }, status: 'APPROVED' },
+      include: { userAuthor: { select: { id: true, name: true, avatarUrl: true } } },
+      orderBy: { createdAt: 'desc' },
+      take: 20
+    });
+
+    const combined = [
+      ...movieReviews.map(m => ({ ...m, mediaType: 'movie' })),
+      ...bookReviews.map(b => ({ ...b, mediaType: 'book' }))
+    ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+     .slice(0, 30);
+
+    return combined;
+  }
 }

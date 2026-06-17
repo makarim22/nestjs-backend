@@ -25,6 +25,8 @@ model User {
   notifications Notification[] @relation("UserNotifications")
   commentVotes CommentVote[]
   curatedLists CuratedList[]
+  followers    Follows[] @relation("following")
+  following    Follows[] @relation("follower")
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -192,4 +194,14 @@ model CuratedListItem {
 
   @@unique([listId, movieReviewId])
   @@unique([listId, bookReviewId])
+}
+
+model Follows {
+  followerId  String
+  followingId String
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@id([followerId, followingId])
 }

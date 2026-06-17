@@ -16,7 +16,7 @@ export class BooksService {
     return this.prisma.bookReview.findMany({
       where: { status: 'APPROVED' },
       orderBy: { readDate: 'desc' },
-      include: { userAuthor: { select: { name: true } } },
+      include: { userAuthor: { select: { id: true, name: true } } },
     });
   }
 
@@ -24,7 +24,7 @@ export class BooksService {
     return this.prisma.bookReview.findMany({
       where: { status: 'PENDING' },
       orderBy: { createdAt: 'desc' },
-      include: { userAuthor: { select: { name: true } } },
+      include: { userAuthor: { select: { id: true, name: true } } },
     });
   }
 
@@ -32,14 +32,14 @@ export class BooksService {
     return this.prisma.bookReview.findMany({
       where: { authorId },
       orderBy: { createdAt: 'desc' },
-      include: { userAuthor: { select: { name: true } } },
+      include: { userAuthor: { select: { id: true, name: true } } },
     });
   }
 
   async findOne(id: string): Promise<BookReview | null> {
     const book = await this.prisma.bookReview.findUnique({
       where: { id },
-      include: { userAuthor: { select: { name: true } } },
+      include: { userAuthor: { select: { id: true, name: true } } },
     });
     if (!book) throw new NotFoundException('Book review not found');
     return book;
