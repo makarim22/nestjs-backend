@@ -20,6 +20,7 @@ import { BadgesModule } from './badges/badges.module';
 import { BountiesModule } from './bounties/bounties.module';
 import { SyndicatesModule } from './syndicates/syndicates.module';
 import { DeaddropsModule } from './deaddrops/deaddrops.module';
+import { QuartermasterModule } from './quartermaster/quartermaster.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { DeaddropsModule } from './deaddrops/deaddrops.module';
     BountiesModule,
     SyndicatesModule,
     DeaddropsModule,
+    QuartermasterModule,
   ],
   controllers: [AppController],
   providers: [AppService],

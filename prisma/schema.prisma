@@ -7,49 +7,50 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-
-
 model User {
-  id           String       @id @default(uuid())
-  email        String       @unique
-  password     String?      // Optional for Google login
-  googleId     String?      @unique
-  avatarUrl    String?
-  name         String?
-  role         String       @default("EDITOR")
-  posts        Post[]
-  movieReviews MovieReview[]
-  bookReviews  BookReview[]
-  savedMovies  SavedMovie[] @relation("UserSavedMovies")
-  savedBooks   SavedBook[]  @relation("UserSavedBooks")
-  notifications Notification[] @relation("UserNotifications")
-  commentVotes CommentVote[]
-  curatedLists CuratedList[]
-  followers    Follows[] @relation("following")
-  following    Follows[] @relation("follower")
-  badges       UserBadge[]
-  claimedBounties   Bounty[] @relation("ClaimedBounties")
-  completedBounties Bounty[] @relation("CompletedBounties")
+  id                String             @id @default(uuid())
+  email             String             @unique
+  password          String? // Optional for Google login
+  googleId          String?            @unique
+  avatarUrl         String?
+  equippedBadge     String?
+  name              String?
+  role              String             @default("EDITOR")
+  posts             Post[]
+  movieReviews      MovieReview[]
+  bookReviews       BookReview[]
+  savedMovies       SavedMovie[]       @relation("UserSavedMovies")
+  savedBooks        SavedBook[]        @relation("UserSavedBooks")
+  notifications     Notification[]     @relation("UserNotifications")
+  commentVotes      CommentVote[]
+  curatedLists      CuratedList[]
+  followers         Follows[]          @relation("following")
+  following         Follows[]          @relation("follower")
+  badges            UserBadge[]
+  claimedBounties   Bounty[]           @relation("ClaimedBounties")
+  completedBounties Bounty[]           @relation("CompletedBounties")
   syndicateMembers  SyndicateMember[]
   syndicateMessages SyndicateMessage[]
   syndicateTargets  SyndicateTarget[]
-  deadDrops    DeadDrop[]
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  deadDrops         DeadDrop[]
+  points            Int                @default(0)
+  purchases         UserPurchase[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
 model Post {
-  id          String     @id @default(uuid())
+  id          String    @id @default(uuid())
   title       String
-  slug        String     @unique
-  content     String     // Stores HTML, Markdown, or JSON blocks
-  status      String     @default("DRAFT")
-  publishedAt DateTime?  // Set when actually published or scheduled
+  slug        String    @unique
+  content     String // Stores HTML, Markdown, or JSON blocks
+  status      String    @default("DRAFT")
+  publishedAt DateTime? // Set when actually published or scheduled
   authorId    String
-  author      User       @relation(fields: [authorId], references: [id])
+  author      User      @relation(fields: [authorId], references: [id])
   tags        Tag[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Tag {
@@ -69,84 +70,84 @@ model Webhook {
 }
 
 model MovieReview {
-  id          String       @id @default(uuid())
-  title       String
-  director    String
-  releaseYear Int
-  rating      Int          // 0 to 10 scale
-  status      String       @default("PENDING") // PENDING, APPROVED, REJECTED
-  theGood     String?
-  theBad      String?
-  watchDate   DateTime     @default(now())
-  posterUrl   String?
-  review      String
-  authorId    String
-  author      User         @relation(fields: [authorId], references: [id])
-  comments    Comment[]
-  savedBy     SavedMovie[]
-  tags        Tag[]
+  id               String            @id @default(uuid())
+  title            String
+  director         String
+  releaseYear      Int
+  rating           Int // 0 to 10 scale
+  status           String            @default("PENDING") // PENDING, APPROVED, REJECTED
+  theGood          String?
+  theBad           String?
+  watchDate        DateTime          @default(now())
+  posterUrl        String?
+  review           String
+  authorId         String
+  author           User              @relation(fields: [authorId], references: [id])
+  comments         Comment[]
+  savedBy          SavedMovie[]
+  tags             Tag[]
   curatedListItems CuratedListItem[]
-  bounty      Bounty?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  bounty           Bounty?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }
 
 model BookReview {
-  id          String       @id @default(uuid())
-  title       String
-  author      String
-  publishYear Int
-  rating      Int          // 0 to 10 scale
-  status      String       @default("PENDING") // PENDING, APPROVED, REJECTED
-  theGood     String?
-  theBad      String?
-  readDate    DateTime     @default(now())
-  coverUrl    String?
-  review      String
-  authorId    String
-  userAuthor  User         @relation(fields: [authorId], references: [id])
-  comments    Comment[]
-  savedBy     SavedBook[]
-  tags        Tag[]
+  id               String            @id @default(uuid())
+  title            String
+  author           String
+  publishYear      Int
+  rating           Int // 0 to 10 scale
+  status           String            @default("PENDING") // PENDING, APPROVED, REJECTED
+  theGood          String?
+  theBad           String?
+  readDate         DateTime          @default(now())
+  coverUrl         String?
+  review           String
+  authorId         String
+  userAuthor       User              @relation(fields: [authorId], references: [id])
+  comments         Comment[]
+  savedBy          SavedBook[]
+  tags             Tag[]
   curatedListItems CuratedListItem[]
-  bounty      Bounty?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  bounty           Bounty?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }
 
 model Comment {
-  id            String       @id @default(uuid())
+  id            String        @id @default(uuid())
   content       String
-  authorName    String?      // Optional, for anonymous users
+  authorName    String? // Optional, for anonymous users
   movieReviewId String?
   bookReviewId  String?
-  movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
-  bookReview    BookReview?  @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
-  createdAt     DateTime     @default(now())
+  movieReview   MovieReview?  @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
+  bookReview    BookReview?   @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
+  createdAt     DateTime      @default(now())
   parentId      String?
-  parent        Comment?     @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies       Comment[]    @relation("CommentReplies")
+  parent        Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       Comment[]     @relation("CommentReplies")
   votes         CommentVote[]
 }
 
 model SavedMovie {
-  id            String       @id @default(uuid())
+  id            String      @id @default(uuid())
   userId        String
-  user          User         @relation("UserSavedMovies", fields: [userId], references: [id], onDelete: Cascade)
+  user          User        @relation("UserSavedMovies", fields: [userId], references: [id], onDelete: Cascade)
   movieReviewId String
-  movieReview   MovieReview  @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
-  createdAt     DateTime     @default(now())
+  movieReview   MovieReview @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
 
   @@unique([userId, movieReviewId])
 }
 
 model SavedBook {
-  id           String       @id @default(uuid())
+  id           String     @id @default(uuid())
   userId       String
-  user         User         @relation("UserSavedBooks", fields: [userId], references: [id], onDelete: Cascade)
+  user         User       @relation("UserSavedBooks", fields: [userId], references: [id], onDelete: Cascade)
   bookReviewId String
-  bookReview   BookReview   @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
-  createdAt    DateTime     @default(now())
+  bookReview   BookReview @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
 
   @@unique([userId, bookReviewId])
 }
@@ -155,9 +156,9 @@ model Notification {
   id        String   @id @default(uuid())
   userId    String
   user      User     @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
-  type      String   // "COMMENT", "REVIEW_APPROVED", etc.
+  type      String // "COMMENT", "REVIEW_APPROVED", etc.
   message   String
-  link      String?  // Optional path e.g. "/review/movies/123"
+  link      String? // Optional path e.g. "/review/movies/123"
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
 }
@@ -168,24 +169,24 @@ model CommentVote {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   commentId String
   comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  value     Int      // 1 or -1
+  value     Int // 1 or -1
   createdAt DateTime @default(now())
 
   @@unique([userId, commentId])
 }
 
 model CuratedList {
-  id          String   @id @default(uuid())
+  id          String            @id @default(uuid())
   title       String
-  description String   // Overview of the list (Markdown supported)
-  type        String   // "MOVIE" or "BOOK"
-  status      String   @default("DRAFT") // "DRAFT" or "PUBLISHED"
+  description String // Overview of the list (Markdown supported)
+  type        String // "MOVIE" or "BOOK"
+  status      String            @default("DRAFT") // "DRAFT" or "PUBLISHED"
   authorId    String
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User              @relation(fields: [authorId], references: [id])
   coverUrl    String?
   items       CuratedListItem[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 }
 
 model CuratedListItem {
@@ -196,8 +197,8 @@ model CuratedListItem {
   movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: Cascade)
   bookReviewId  String?
   bookReview    BookReview?  @relation(fields: [bookReviewId], references: [id], onDelete: Cascade)
-  order         Int          // To determine ranking/sequence
-  blurb         String       // Editorial reason for inclusion (Markdown supported)
+  order         Int // To determine ranking/sequence
+  blurb         String // Editorial reason for inclusion (Markdown supported)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
@@ -216,11 +217,11 @@ model Follows {
 }
 
 model Badge {
-  id          String   @id @default(uuid())
-  name        String   @unique
+  id          String      @id @default(uuid())
+  name        String      @unique
   description String
-  icon        String   // Emoji or string
-  criteria    String   // Identifier like 'FIRST_REVIEW'
+  icon        String // Emoji or string
+  criteria    String // Identifier like 'FIRST_REVIEW'
   users       UserBadge[]
 }
 
@@ -236,42 +237,42 @@ model UserBadge {
 }
 
 model Bounty {
-  id            String   @id @default(uuid())
-  title         String   // The media title wanted
-  type          String   // "MOVIE" or "BOOK"
-  description   String   // Instructions/context from admin
-  status        String   @default("OPEN") // OPEN, CLAIMED, COMPLETED
-  rewardPoints  Int      @default(50)
-  
+  id           String @id @default(uuid())
+  title        String // The media title wanted
+  type         String // "MOVIE" or "BOOK"
+  description  String // Instructions/context from admin
+  status       String @default("OPEN") // OPEN, CLAIMED, COMPLETED
+  rewardPoints Int    @default(50)
+
   // Claiming
-  claimedById   String?
-  claimedBy     User?    @relation("ClaimedBounties", fields: [claimedById], references: [id], onDelete: SetNull)
-  claimedAt     DateTime?
-  
+  claimedById String?
+  claimedBy   User?     @relation("ClaimedBounties", fields: [claimedById], references: [id], onDelete: SetNull)
+  claimedAt   DateTime?
+
   // Completion
   completedById String?
-  completedBy   User?    @relation("CompletedBounties", fields: [completedById], references: [id], onDelete: SetNull)
+  completedBy   User?     @relation("CompletedBounties", fields: [completedById], references: [id], onDelete: SetNull)
   completedAt   DateTime?
-  
-  // Link to the fulfilling review
-  movieReviewId String?  @unique
-  movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: SetNull)
-  
-  bookReviewId  String?  @unique
-  bookReview    BookReview? @relation(fields: [bookReviewId], references: [id], onDelete: SetNull)
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  // Link to the fulfilling review
+  movieReviewId String?      @unique
+  movieReview   MovieReview? @relation(fields: [movieReviewId], references: [id], onDelete: SetNull)
+
+  bookReviewId String?     @unique
+  bookReview   BookReview? @relation(fields: [bookReviewId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Syndicate {
-  id          String   @id @default(uuid())
-  name        String   @unique
+  id          String             @id @default(uuid())
+  name        String             @unique
   description String
   avatarUrl   String?
   creatorId   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
   members     SyndicateMember[]
   messages    SyndicateMessage[]
   targets     SyndicateTarget[]
@@ -304,7 +305,7 @@ model SyndicateTarget {
   syndicateId String
   syndicate   Syndicate @relation(fields: [syndicateId], references: [id], onDelete: Cascade)
   title       String
-  type        String    // MOVIE or BOOK
+  type        String // MOVIE or BOOK
   addedById   String
   addedBy     User      @relation(fields: [addedById], references: [id], onDelete: Cascade)
   status      String    @default("ACTIVE") // ACTIVE, INVESTIGATED
@@ -314,11 +315,33 @@ model SyndicateTarget {
 model DeadDrop {
   id        String   @id @default(uuid())
   title     String
-  clue      String   // Teaser hint shown while locked
-  content   String   // Full content, redacted by the API until unlocked
+  clue      String // Teaser hint shown while locked
+  content   String // Full content, redacted by the API until unlocked
   unlocksAt DateTime // When the content becomes visible
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model StoreItem {
+  id          String         @id @default(uuid())
+  name        String         @unique
+  description String
+  type        String // "AVATAR", "THEME", "BADGE"
+  cost        Int
+  assetUrl    String? // URL to avatar or CSS class name
+  purchases   UserPurchase[]
+  createdAt   DateTime       @default(now())
+}
+
+model UserPurchase {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemId      String
+  item        StoreItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  purchasedAt DateTime  @default(now())
+
+  @@unique([userId, itemId])
 }

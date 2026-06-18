@@ -41,6 +41,37 @@ export class BountiesService {
     });
   }
 
+  async completeBounty(id: string, adminUserId: string) {
+    return this.prisma.$transaction(async (tx) => {
+      const bounty = await tx.bounty.findUnique({ where: { id } });
+      if (!bounty) throw new NotFoundException('Bounty not found');
+      if (bounty.status !== 'CLAIMED') throw new BadRequestException('Bounty is not claimed');
+
+      const updatedBounty = await tx.bounty.update({
+        where: { id },
+        data: {
+          status: 'COMPLETED',
+          completedById: adminUserId,
+          completedAt: new Date(),
+        },
+      });
+
+      // Award points to the agent who fulfilled the bounty
+      if (bounty.claimedById && bounty.rewardPoints > 0) {
+        await tx.user.update({
+          where: { id: bounty.claimedById },
+          data: {
+            points: {
+              increment: bounty.rewardPoints,
+            },
+          },
+        });
+      }
+
+      return updatedBounty;
+    });
+  }
+
   async unclaim(id: string) {
     const bounty = await this.prisma.bounty.findUnique({ where: { id } });
     if (!bounty) throw new NotFoundException('Bounty not found');
