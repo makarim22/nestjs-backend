@@ -8,7 +8,7 @@ export class SyndicatesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Body() data: { name: string; description: string }, @Request() req) {
+  create(@Body() data: { name: string; description: string }, @Request() req: any) {
     return this.syndicatesService.create({ ...data, creatorId: req.user.id });
   }
 
@@ -24,25 +24,25 @@ export class SyndicatesController {
 
   @Post(':id/join')
   @UseGuards(JwtAuthGuard)
-  join(@Param('id') id: string, @Request() req) {
+  join(@Param('id') id: string, @Request() req: any) {
     return this.syndicatesService.join(id, req.user.id);
   }
 
   @Post(':id/leave')
   @UseGuards(JwtAuthGuard)
-  leave(@Param('id') id: string, @Request() req) {
+  leave(@Param('id') id: string, @Request() req: any) {
     return this.syndicatesService.leave(id, req.user.id);
   }
 
   @Post(':id/messages')
   @UseGuards(JwtAuthGuard)
-  addMessage(@Param('id') id: string, @Body() data: { content: string }, @Request() req) {
+  addMessage(@Param('id') id: string, @Body() data: { content: string }, @Request() req: any) {
     return this.syndicatesService.addMessage(id, req.user.id, data.content);
   }
 
   @Post(':id/targets')
   @UseGuards(JwtAuthGuard)
-  addTarget(@Param('id') id: string, @Body() data: { title: string; type: string }, @Request() req) {
+  addTarget(@Param('id') id: string, @Body() data: { title: string; type: string }, @Request() req: any) {
     return this.syndicatesService.addTarget(id, req.user.id, data.title, data.type);
   }
 }

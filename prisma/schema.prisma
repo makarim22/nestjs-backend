@@ -33,6 +33,7 @@ model User {
   syndicateMembers  SyndicateMember[]
   syndicateMessages SyndicateMessage[]
   syndicateTargets  SyndicateTarget[]
+  deadDrops    DeadDrop[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -310,3 +311,14 @@ model SyndicateTarget {
   createdAt   DateTime  @default(now())
 }
 
+model DeadDrop {
+  id        String   @id @default(uuid())
+  title     String
+  clue      String   // Teaser hint shown while locked
+  content   String   // Full content, redacted by the API until unlocked
+  unlocksAt DateTime // When the content becomes visible
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

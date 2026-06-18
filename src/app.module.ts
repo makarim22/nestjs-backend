@@ -19,6 +19,7 @@ import { ListsModule } from './lists/lists.module';
 import { BadgesModule } from './badges/badges.module';
 import { BountiesModule } from './bounties/bounties.module';
 import { SyndicatesModule } from './syndicates/syndicates.module';
+import { DeaddropsModule } from './deaddrops/deaddrops.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { SyndicatesModule } from './syndicates/syndicates.module';
     BadgesModule,
     BountiesModule,
     SyndicatesModule,
+    DeaddropsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
