@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { SyndicatesService } from './syndicates.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -8,7 +16,10 @@ export class SyndicatesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Body() data: { name: string; description: string }, @Request() req: any) {
+  create(
+    @Body() data: { name: string; description: string },
+    @Request() req: any,
+  ) {
     return this.syndicatesService.create({ ...data, creatorId: req.user.id });
   }
 
@@ -36,13 +47,26 @@ export class SyndicatesController {
 
   @Post(':id/messages')
   @UseGuards(JwtAuthGuard)
-  addMessage(@Param('id') id: string, @Body() data: { content: string }, @Request() req: any) {
+  addMessage(
+    @Param('id') id: string,
+    @Body() data: { content: string },
+    @Request() req: any,
+  ) {
     return this.syndicatesService.addMessage(id, req.user.id, data.content);
   }
 
   @Post(':id/targets')
   @UseGuards(JwtAuthGuard)
-  addTarget(@Param('id') id: string, @Body() data: { title: string; type: string }, @Request() req: any) {
-    return this.syndicatesService.addTarget(id, req.user.id, data.title, data.type);
+  addTarget(
+    @Param('id') id: string,
+    @Body() data: { title: string; type: string },
+    @Request() req: any,
+  ) {
+    return this.syndicatesService.addTarget(
+      id,
+      req.user.id,
+      data.title,
+      data.type,
+    );
   }
 }

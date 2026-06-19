@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { DeaddropsService } from './deaddrops.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -9,7 +17,8 @@ export class DeaddropsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(
-    @Body() data: { title: string; clue: string; content: string; unlocksAt: string },
+    @Body()
+    data: { title: string; clue: string; content: string; unlocksAt: string },
     @Request() req: any,
   ) {
     return this.deaddropsService.create({ ...data, authorId: req.user.id });

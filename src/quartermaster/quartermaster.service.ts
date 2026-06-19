@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -57,7 +61,9 @@ export class QuartermasterService {
 
       // 3. Check balance
       if (user.points < item.cost) {
-        throw new BadRequestException(`Insufficient points. You need ${item.cost} points.`);
+        throw new BadRequestException(
+          `Insufficient points. You need ${item.cost} points.`,
+        );
       }
 
       // 4. Deduct points and create purchase
@@ -73,38 +79,48 @@ export class QuartermasterService {
         },
       });
 
-      return { success: true, pointsRemaining: user.points - item.cost, purchase };
+      return {
+        success: true,
+        pointsRemaining: user.points - item.cost,
+        purchase,
+      };
     });
   }
 
   async equipItem(userId: string, itemId: string) {
-    const item = await this.prisma.storeItem.findUnique({ where: { id: itemId } });
+    const item = await this.prisma.storeItem.findUnique({
+      where: { id: itemId },
+    });
     if (!item) throw new NotFoundException('Item not found');
 
     const purchase = await this.prisma.userPurchase.findUnique({
       where: {
-        userId_itemId: { userId, itemId }
-      }
+        userId_itemId: { userId, itemId },
+      },
     });
 
     if (!purchase) {
-      throw new BadRequestException('You do not own this item. Requisition it first.');
+      throw new BadRequestException(
+        'You do not own this item. Requisition it first.',
+      );
     }
 
     if (item.type === 'AVATAR') {
       await this.prisma.user.update({
         where: { id: userId },
-        data: { avatarUrl: item.assetUrl }
+        data: { avatarUrl: item.assetUrl },
       });
       return { success: true, type: 'AVATAR', assetUrl: item.assetUrl };
     } else if (item.type === 'BADGE') {
       await this.prisma.user.update({
         where: { id: userId },
-        data: { equippedBadge: item.assetUrl }
+        data: { equippedBadge: item.assetUrl },
       });
       return { success: true, type: 'BADGE', assetUrl: item.assetUrl };
     }
 
-    throw new BadRequestException('This item type cannot be equipped on the server.');
+    throw new BadRequestException(
+      'This item type cannot be equipped on the server.',
+    );
   }
 }

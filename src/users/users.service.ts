@@ -7,7 +7,7 @@ import { BadgesService } from '../badges/badges.service';
 export class UsersService {
   constructor(
     private prisma: PrismaService,
-    private badgesService: BadgesService
+    private badgesService: BadgesService,
   ) {}
 
   async findOne(email: string): Promise<User | null> {
@@ -138,12 +138,12 @@ export class UsersService {
         createdAt: true,
         badges: {
           include: { badge: true },
-          orderBy: { awardedAt: 'desc' }
+          orderBy: { awardedAt: 'desc' },
         },
         _count: {
-          select: { followers: true, following: true }
-        }
-      }
+          select: { followers: true, following: true },
+        },
+      },
     });
 
     if (!user) return null;
@@ -152,8 +152,11 @@ export class UsersService {
     if (currentUserId) {
       const follow = await this.prisma.follows.findUnique({
         where: {
-          followerId_followingId: { followerId: currentUserId, followingId: userId }
-        }
+          followerId_followingId: {
+            followerId: currentUserId,
+            followingId: userId,
+          },
+        },
       });
       isFollowing = !!follow;
     }
@@ -161,38 +164,38 @@ export class UsersService {
     const movieReviews = await this.prisma.movieReview.findMany({
       where: { authorId: userId, status: 'APPROVED' },
       orderBy: { createdAt: 'desc' },
-      take: 10
+      take: 10,
     });
 
     const bookReviews = await this.prisma.bookReview.findMany({
       where: { authorId: userId, status: 'APPROVED' },
       orderBy: { createdAt: 'desc' },
-      take: 10
+      take: 10,
     });
 
     return {
       ...user,
       isFollowing,
       movieReviews,
-      bookReviews
+      bookReviews,
     };
   }
 
   async toggleFollow(followerId: string, followingId: string) {
-    if (followerId === followingId) throw new Error("Cannot follow yourself");
+    if (followerId === followingId) throw new Error('Cannot follow yourself');
 
     const existing = await this.prisma.follows.findUnique({
-      where: { followerId_followingId: { followerId, followingId } }
+      where: { followerId_followingId: { followerId, followingId } },
     });
 
     if (existing) {
       await this.prisma.follows.delete({
-        where: { followerId_followingId: { followerId, followingId } }
+        where: { followerId_followingId: { followerId, followingId } },
       });
       return { status: 'unfollowed' };
     } else {
       await this.prisma.follows.create({
-        data: { followerId, followingId }
+        data: { followerId, followingId },
       });
       await this.badgesService.checkNetworkerBadge(followerId);
       return { status: 'followed' };
@@ -202,32 +205,37 @@ export class UsersService {
   async getFeed(userId: string) {
     const following = await this.prisma.follows.findMany({
       where: { followerId: userId },
-      select: { followingId: true }
+      select: { followingId: true },
     });
-    
-    const followingIds = following.map(f => f.followingId);
+
+    const followingIds = following.map((f) => f.followingId);
 
     if (followingIds.length === 0) return [];
 
     const movieReviews = await this.prisma.movieReview.findMany({
       where: { authorId: { in: followingIds }, status: 'APPROVED' },
-      include: { author: { select: { id: true, name: true, avatarUrl: true } } },
+      include: {
+        author: { select: { id: true, name: true, avatarUrl: true } },
+      },
       orderBy: { createdAt: 'desc' },
-      take: 20
+      take: 20,
     });
 
     const bookReviews = await this.prisma.bookReview.findMany({
       where: { authorId: { in: followingIds }, status: 'APPROVED' },
-      include: { userAuthor: { select: { id: true, name: true, avatarUrl: true } } },
+      include: {
+        userAuthor: { select: { id: true, name: true, avatarUrl: true } },
+      },
       orderBy: { createdAt: 'desc' },
-      take: 20
+      take: 20,
     });
 
     const combined = [
-      ...movieReviews.map(m => ({ ...m, mediaType: 'movie' })),
-      ...bookReviews.map(b => ({ ...b, mediaType: 'book' }))
-    ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-     .slice(0, 30);
+      ...movieReviews.map((m) => ({ ...m, mediaType: 'movie' })),
+      ...bookReviews.map((b) => ({ ...b, mediaType: 'book' })),
+    ]
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, 30);
 
     return combined;
   }

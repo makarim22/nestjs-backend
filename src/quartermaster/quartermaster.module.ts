@@ -6,6 +6,6 @@ import { PrismaModule } from '../prisma/prisma.module';
 @Module({
   imports: [PrismaModule],
   providers: [QuartermasterService],
-  controllers: [QuartermasterController]
+  controllers: [QuartermasterController],
 })
 export class QuartermasterModule {}

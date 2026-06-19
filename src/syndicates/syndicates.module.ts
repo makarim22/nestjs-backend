@@ -4,6 +4,6 @@ import { SyndicatesController } from './syndicates.controller';
 
 @Module({
   providers: [SyndicatesService],
-  controllers: [SyndicatesController]
+  controllers: [SyndicatesController],
 })
 export class SyndicatesModule {}

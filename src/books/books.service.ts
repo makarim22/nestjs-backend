@@ -7,7 +7,7 @@ import { BadgesService } from '../badges/badges.service';
 export class BooksService {
   constructor(
     private prisma: PrismaService,
-    private badgesService: BadgesService
+    private badgesService: BadgesService,
   ) {}
 
   async create(
@@ -28,8 +28,8 @@ export class BooksService {
           title: book.title,
           type: 'BOOK',
           status: 'CLAIMED',
-          claimedById: book.authorId
-        }
+          claimedById: book.authorId,
+        },
       });
 
       if (activeBounty) {
@@ -39,8 +39,8 @@ export class BooksService {
             status: 'COMPLETED',
             completedById: book.authorId,
             completedAt: new Date(),
-            bookReviewId: book.id
-          }
+            bookReviewId: book.id,
+          },
         });
         await this.badgesService.checkBountyHunterBadge(book.authorId);
       }

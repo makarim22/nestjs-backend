@@ -9,7 +9,7 @@ export class CommentsService {
   constructor(
     private prisma: PrismaService,
     private notifications: NotificationsService,
-    private badgesService: BadgesService
+    private badgesService: BadgesService,
   ) {}
 
   async create(data: any) {
@@ -77,22 +77,34 @@ export class CommentsService {
 
   private formatComments(comments: any[], userId?: string) {
     return comments.map((c) => {
-      const score = c.votes ? c.votes.reduce((acc: number, v: any) => acc + v.value, 0) : 0;
-      const userVote = userId && c.votes ? c.votes.find((v: any) => v.userId === userId)?.value || 0 : 0;
+      const score = c.votes
+        ? c.votes.reduce((acc: number, v: any) => acc + v.value, 0)
+        : 0;
+      const userVote =
+        userId && c.votes
+          ? c.votes.find((v: any) => v.userId === userId)?.value || 0
+          : 0;
 
-      const replies = c.replies ? c.replies.map((r: any) => {
-        const rScore = r.votes ? r.votes.reduce((acc: number, v: any) => acc + v.value, 0) : 0;
-        const rUserVote = userId && r.votes ? r.votes.find((v: any) => v.userId === userId)?.value || 0 : 0;
-        return {
-          id: r.id,
-          content: r.content,
-          authorName: r.authorName,
-          createdAt: r.createdAt,
-          parentId: r.parentId,
-          score: rScore,
-          userVote: rUserVote,
-        };
-      }) : [];
+      const replies = c.replies
+        ? c.replies.map((r: any) => {
+            const rScore = r.votes
+              ? r.votes.reduce((acc: number, v: any) => acc + v.value, 0)
+              : 0;
+            const rUserVote =
+              userId && r.votes
+                ? r.votes.find((v: any) => v.userId === userId)?.value || 0
+                : 0;
+            return {
+              id: r.id,
+              content: r.content,
+              authorName: r.authorName,
+              createdAt: r.createdAt,
+              parentId: r.parentId,
+              score: rScore,
+              userVote: rUserVote,
+            };
+          })
+        : [];
 
       return {
         id: c.id,
@@ -133,9 +145,9 @@ export class CommentsService {
       where: { id: commentId },
       include: { votes: true },
     });
-    
+
     if (!comment) return { score: 0, userVote: 0 };
-    
+
     const score = comment.votes.reduce((acc, v) => acc + v.value, 0);
     return { score, userVote: value };
   }

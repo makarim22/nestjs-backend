@@ -13,23 +13,29 @@ export class BadgesService {
       if (!badge) return;
 
       const existing = await this.prisma.userBadge.findUnique({
-        where: { userId_badgeId: { userId, badgeId: badge.id } }
+        where: { userId_badgeId: { userId, badgeId: badge.id } },
       });
 
       if (!existing) {
         await this.prisma.userBadge.create({
-          data: { userId, badgeId: badge.id }
+          data: { userId, badgeId: badge.id },
         });
         this.logger.log(`Awarded badge ${badge.name} to user ${userId}`);
       }
     } catch (error: any) {
-      this.logger.error(`Failed to award badge ${criteria} to user ${userId}: ${error.message}`);
+      this.logger.error(
+        `Failed to award badge ${criteria} to user ${userId}: ${error.message}`,
+      );
     }
   }
 
   async checkReviewBadges(userId: string) {
-    const movieReviews = await this.prisma.movieReview.count({ where: { authorId: userId, status: 'APPROVED' } });
-    const bookReviews = await this.prisma.bookReview.count({ where: { authorId: userId, status: 'APPROVED' } });
+    const movieReviews = await this.prisma.movieReview.count({
+      where: { authorId: userId, status: 'APPROVED' },
+    });
+    const bookReviews = await this.prisma.bookReview.count({
+      where: { authorId: userId, status: 'APPROVED' },
+    });
 
     if (movieReviews + bookReviews >= 1) {
       await this.awardBadge(userId, 'FIRST_REVIEW');
@@ -37,14 +43,18 @@ export class BadgesService {
   }
 
   async checkNetworkerBadge(userId: string) {
-    const following = await this.prisma.follows.count({ where: { followerId: userId } });
+    const following = await this.prisma.follows.count({
+      where: { followerId: userId },
+    });
     if (following >= 5) {
       await this.awardBadge(userId, 'NETWORKER');
     }
   }
 
   async checkInformantBadge(userId: string) {
-    const upvotesCast = await this.prisma.commentVote.count({ where: { userId, value: 1 } });
+    const upvotesCast = await this.prisma.commentVote.count({
+      where: { userId, value: 1 },
+    });
 
     if (upvotesCast >= 5) {
       await this.awardBadge(userId, 'INFORMANT');
@@ -52,7 +62,9 @@ export class BadgesService {
   }
 
   async checkBountyHunterBadge(userId: string) {
-    const completedBounties = await this.prisma.bounty.count({ where: { completedById: userId } });
+    const completedBounties = await this.prisma.bounty.count({
+      where: { completedById: userId },
+    });
     if (completedBounties >= 1) {
       await this.awardBadge(userId, 'BOUNTY_HUNTER');
     }

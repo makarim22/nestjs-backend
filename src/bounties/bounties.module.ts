@@ -7,6 +7,6 @@ import { PrismaModule } from '../prisma/prisma.module';
   imports: [PrismaModule],
   providers: [BountiesService],
   controllers: [BountiesController],
-  exports: [BountiesService]
+  exports: [BountiesService],
 })
 export class BountiesModule {}

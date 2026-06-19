@@ -11,9 +11,9 @@ export class ListsService {
       orderBy: { createdAt: 'desc' },
       include: {
         author: {
-          select: { id: true, name: true }
-        }
-      }
+          select: { id: true, name: true },
+        },
+      },
     });
   }
 
@@ -22,9 +22,9 @@ export class ListsService {
       orderBy: { createdAt: 'desc' },
       include: {
         author: {
-          select: { id: true, name: true }
-        }
-      }
+          select: { id: true, name: true },
+        },
+      },
     });
   }
 
@@ -37,10 +37,10 @@ export class ListsService {
           orderBy: { order: 'asc' },
           include: {
             movieReview: true,
-            bookReview: true
-          }
-        }
-      }
+            bookReview: true,
+          },
+        },
+      },
     });
     if (!list) throw new NotFoundException('List not found');
     return list;
@@ -48,7 +48,7 @@ export class ListsService {
 
   async create(data: any, authorId: string) {
     const { items, ...listData } = data;
-    
+
     return this.prisma.curatedList.create({
       data: {
         ...listData,
@@ -57,21 +57,22 @@ export class ListsService {
           create: items.map((item: any) => ({
             order: item.order,
             blurb: item.blurb,
-            movieReviewId: listData.type === 'MOVIE' ? item.reviewId : undefined,
-            bookReviewId: listData.type === 'BOOK' ? item.reviewId : undefined
-          }))
-        }
-      }
+            movieReviewId:
+              listData.type === 'MOVIE' ? item.reviewId : undefined,
+            bookReviewId: listData.type === 'BOOK' ? item.reviewId : undefined,
+          })),
+        },
+      },
     });
   }
 
   async update(id: string, data: any) {
     const { items, ...listData } = data;
-    
+
     // Simplest way to update items is to delete and recreate them
     if (items) {
       await this.prisma.curatedListItem.deleteMany({
-        where: { listId: id }
+        where: { listId: id },
       });
     }
 
@@ -84,18 +85,24 @@ export class ListsService {
             create: items.map((item: any) => ({
               order: item.order,
               blurb: item.blurb,
-              movieReviewId: listData.type === 'MOVIE' || data.type === 'MOVIE' ? item.reviewId : undefined,
-              bookReviewId: listData.type === 'BOOK' || data.type === 'BOOK' ? item.reviewId : undefined
-            }))
-          }
-        })
-      }
+              movieReviewId:
+                listData.type === 'MOVIE' || data.type === 'MOVIE'
+                  ? item.reviewId
+                  : undefined,
+              bookReviewId:
+                listData.type === 'BOOK' || data.type === 'BOOK'
+                  ? item.reviewId
+                  : undefined,
+            })),
+          },
+        }),
+      },
     });
   }
 
   async remove(id: string) {
     return this.prisma.curatedList.delete({
-      where: { id }
+      where: { id },
     });
   }
 }

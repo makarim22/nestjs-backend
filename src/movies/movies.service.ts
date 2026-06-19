@@ -7,7 +7,7 @@ import { BadgesService } from '../badges/badges.service';
 export class MoviesService {
   constructor(
     private prisma: PrismaService,
-    private badgesService: BadgesService
+    private badgesService: BadgesService,
   ) {}
 
   async create(
@@ -28,8 +28,8 @@ export class MoviesService {
           title: movie.title,
           type: 'MOVIE',
           status: 'CLAIMED',
-          claimedById: movie.authorId
-        }
+          claimedById: movie.authorId,
+        },
       });
 
       if (activeBounty) {
@@ -39,8 +39,8 @@ export class MoviesService {
             status: 'COMPLETED',
             completedById: movie.authorId,
             completedAt: new Date(),
-            movieReviewId: movie.id
-          }
+            movieReviewId: movie.id,
+          },
         });
         await this.badgesService.checkBountyHunterBadge(movie.authorId);
       }

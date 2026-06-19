@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Req, UnauthorizedException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+  Req,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { BountiesService } from './bounties.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -15,7 +24,9 @@ export class BountiesController {
   @Post()
   create(@Body() body: any, @Req() req: any) {
     if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
-      throw new UnauthorizedException('Only admins or editors can create bounties');
+      throw new UnauthorizedException(
+        'Only admins or editors can create bounties',
+      );
     }
     return this.bountiesService.create(body);
   }
@@ -30,7 +41,9 @@ export class BountiesController {
   @Post(':id/unclaim')
   unclaim(@Param('id') id: string, @Req() req: any) {
     if (req.user.role !== 'ADMIN' && req.user.role !== 'EDITOR') {
-      throw new UnauthorizedException('Only admins or editors can unclaim bounties');
+      throw new UnauthorizedException(
+        'Only admins or editors can unclaim bounties',
+      );
     }
     return this.bountiesService.unclaim(id);
   }
