@@ -1,0 +1,461 @@
+{
+  "movies": [
+    {
+      "title": "High and Low",
+      "author": "Akira Kurosawa",
+      "publishYear": 1963
+    },
+    {
+      "title": "Yojimbo",
+      "author": "Akira Kurosawa",
+      "publishYear": 1961
+    },
+    {
+      "title": "Sansho the Bailiff",
+      "author": "Kenji Mizoguchi",
+      "publishYear": 1954
+    },
+    {
+      "title": "Harakiri",
+      "author": "Masaki Kobayashi",
+      "publishYear": 1962
+    },
+    {
+      "title": "Kwaidan",
+      "author": "Masaki Kobayashi",
+      "publishYear": 1964
+    },
+    {
+      "title": "Branded to Kill",
+      "author": "Seijun Suzuki",
+      "publishYear": 1967
+    },
+    {
+      "title": "Tampopo",
+      "author": "Juzo Itami",
+      "publishYear": 1985
+    },
+    {
+      "title": "Still Walking",
+      "author": "Hirokazu Kore-eda",
+      "publishYear": 2008
+    },
+    {
+      "title": "Shoplifters",
+      "author": "Hirokazu Kore-eda",
+      "publishYear": 2018
+    },
+    {
+      "title": "Drive My Car",
+      "author": "Ryusuke Hamaguchi",
+      "publishYear": 2021
+    },
+    {
+      "title": "Poetry",
+      "author": "Lee Chang-dong",
+      "publishYear": 2010
+    },
+    {
+      "title": "Secret Sunshine",
+      "author": "Lee Chang-dong",
+      "publishYear": 2007
+    },
+    {
+      "title": "Peppermint Candy",
+      "author": "Lee Chang-dong",
+      "publishYear": 1999
+    },
+    {
+      "title": "Mother",
+      "author": "Bong Joon-ho",
+      "publishYear": 2009
+    },
+    {
+      "title": "The Host",
+      "author": "Bong Joon-ho",
+      "publishYear": 2006
+    },
+    {
+      "title": "The Handmaiden",
+      "author": "Park Chan-wook",
+      "publishYear": 2016
+    },
+    {
+      "title": "Decision to Leave",
+      "author": "Park Chan-wook",
+      "publishYear": 2022
+    },
+    {
+      "title": "Sympathy for Mr. Vengeance",
+      "author": "Park Chan-wook",
+      "publishYear": 2002
+    },
+    {
+      "title": "Lady Vengeance",
+      "author": "Park Chan-wook",
+      "publishYear": 2005
+    },
+    {
+      "title": "Joint Security Area",
+      "author": "Park Chan-wook",
+      "publishYear": 2000
+    },
+    {
+      "title": "Spring, Summer, Fall, Winter... and Spring",
+      "author": "Kim Ki-duk",
+      "publishYear": 2003
+    },
+    {
+      "title": "3-Iron",
+      "author": "Kim Ki-duk",
+      "publishYear": 2004
+    },
+    {
+      "title": "A City of Sadness",
+      "author": "Hou Hsiao-hsien",
+      "publishYear": 1989
+    },
+    {
+      "title": "The Puppetmaster",
+      "author": "Hou Hsiao-hsien",
+      "publishYear": 1993
+    },
+    {
+      "title": "Millennium Mambo",
+      "author": "Hou Hsiao-hsien",
+      "publishYear": 2001
+    },
+    {
+      "title": "The Assassin",
+      "author": "Hou Hsiao-hsien",
+      "publishYear": 2015
+    },
+    {
+      "title": "Taipei Story",
+      "author": "Edward Yang",
+      "publishYear": 1985
+    },
+    {
+      "title": "The Terrorizers",
+      "author": "Edward Yang",
+      "publishYear": 1986
+    },
+    {
+      "title": "Rebel Without a Cause",
+      "author": "Nicholas Ray",
+      "publishYear": 1955
+    },
+    {
+      "title": "In a Lonely Place",
+      "author": "Nicholas Ray",
+      "publishYear": 1950
+    },
+    {
+      "title": "Johnny Guitar",
+      "author": "Nicholas Ray",
+      "publishYear": 1954
+    },
+    {
+      "title": "Bigger Than Life",
+      "author": "Nicholas Ray",
+      "publishYear": 1956
+    },
+    {
+      "title": "Night of the Hunter",
+      "author": "Charles Laughton",
+      "publishYear": 1955
+    },
+    {
+      "title": "Touch of Evil",
+      "author": "Orson Welles",
+      "publishYear": 1958
+    },
+    {
+      "title": "The Magnificent Ambersons",
+      "author": "Orson Welles",
+      "publishYear": 1942
+    },
+    {
+      "title": "Chimes at Midnight",
+      "author": "Orson Welles",
+      "publishYear": 1965
+    },
+    {
+      "title": "F for Fake",
+      "author": "Orson Welles",
+      "publishYear": 1973
+    },
+    {
+      "title": "The Lady from Shanghai",
+      "author": "Orson Welles",
+      "publishYear": 1947
+    },
+    {
+      "title": "His Girl Friday",
+      "author": "Howard Hawks",
+      "publishYear": 1940
+    },
+    {
+      "title": "Bringing Up Baby",
+      "author": "Howard Hawks",
+      "publishYear": 1938
+    },
+    {
+      "title": "The Big Sleep",
+      "author": "Howard Hawks",
+      "publishYear": 1946
+    }
+  ],
+  "books": [
+    {
+      "title": "Light in August",
+      "author": "William Faulkner",
+      "publishYear": 1932
+    },
+    {
+      "title": "Sanctuary",
+      "author": "William Faulkner",
+      "publishYear": 1931
+    },
+    {
+      "title": "The Bluest Eye",
+      "author": "Toni Morrison",
+      "publishYear": 1970
+    },
+    {
+      "title": "Jazz",
+      "author": "Toni Morrison",
+      "publishYear": 1992
+    },
+    {
+      "title": "Another Country",
+      "author": "James Baldwin",
+      "publishYear": 1962
+    },
+    {
+      "title": "Black Boy",
+      "author": "Richard Wright",
+      "publishYear": 1945
+    },
+    {
+      "title": "Parable of the Talents",
+      "author": "Octavia Butler",
+      "publishYear": 1998
+    },
+    {
+      "title": "Dawn",
+      "author": "Octavia Butler",
+      "publishYear": 1987
+    },
+    {
+      "title": "A Wizard of Earthsea",
+      "author": "Ursula K. Le Guin",
+      "publishYear": 1968
+    },
+    {
+      "title": "Count Zero",
+      "author": "William Gibson",
+      "publishYear": 1986
+    },
+    {
+      "title": "Mona Lisa Overdrive",
+      "author": "William Gibson",
+      "publishYear": 1988
+    },
+    {
+      "title": "Cryptonomicon",
+      "author": "Neal Stephenson",
+      "publishYear": 1999
+    },
+    {
+      "title": "Anathem",
+      "author": "Neal Stephenson",
+      "publishYear": 2008
+    },
+    {
+      "title": "The Fall of Hyperion",
+      "author": "Dan Simmons",
+      "publishYear": 1990
+    },
+    {
+      "title": "Dune Messiah",
+      "author": "Frank Herbert",
+      "publishYear": 1969
+    },
+    {
+      "title": "Children of Dune",
+      "author": "Frank Herbert",
+      "publishYear": 1976
+    },
+    {
+      "title": "God Emperor of Dune",
+      "author": "Frank Herbert",
+      "publishYear": 1981
+    },
+    {
+      "title": "Foundation and Empire",
+      "author": "Isaac Asimov",
+      "publishYear": 1952
+    },
+    {
+      "title": "Second Foundation",
+      "author": "Isaac Asimov",
+      "publishYear": 1953
+    },
+    {
+      "title": "Solaris",
+      "author": "Stanislaw Lem",
+      "publishYear": 1961
+    },
+    {
+      "title": "The Cyberiad",
+      "author": "Stanislaw Lem",
+      "publishYear": 1965
+    },
+    {
+      "title": "Hard to Be a God",
+      "author": "Arkady and Boris Strugatsky",
+      "publishYear": 1964
+    },
+    {
+      "title": "We",
+      "author": "Yevgeny Zamyatin",
+      "publishYear": 1924
+    },
+    {
+      "title": "Nineteen Eighty-Four",
+      "author": "George Orwell",
+      "publishYear": 1949
+    },
+    {
+      "title": "Animal Farm",
+      "author": "George Orwell",
+      "publishYear": 1945
+    },
+    {
+      "title": "Homage to Catalonia",
+      "author": "George Orwell",
+      "publishYear": 1938
+    },
+    {
+      "title": "Mother Night",
+      "author": "Kurt Vonnegut",
+      "publishYear": 1961
+    },
+    {
+      "title": "Breakfast of Champions",
+      "author": "Kurt Vonnegut",
+      "publishYear": 1973
+    },
+    {
+      "title": "The Sirens of Titan",
+      "author": "Kurt Vonnegut",
+      "publishYear": 1959
+    },
+    {
+      "title": "V.",
+      "author": "Thomas Pynchon",
+      "publishYear": 1963
+    },
+    {
+      "title": "Mason & Dixon",
+      "author": "Thomas Pynchon",
+      "publishYear": 1997
+    },
+    {
+      "title": "Inherent Vice",
+      "author": "Thomas Pynchon",
+      "publishYear": 2009
+    },
+    {
+      "title": "Libra",
+      "author": "Don DeLillo",
+      "publishYear": 1988
+    },
+    {
+      "title": "Mao II",
+      "author": "Don DeLillo",
+      "publishYear": 1991
+    },
+    {
+      "title": "American Pastoral",
+      "author": "Philip Roth",
+      "publishYear": 1997
+    },
+    {
+      "title": "Portnoy's Complaint",
+      "author": "Philip Roth",
+      "publishYear": 1969
+    },
+    {
+      "title": "The Human Stain",
+      "author": "Philip Roth",
+      "publishYear": 2000
+    },
+    {
+      "title": "Sabbath's Theater",
+      "author": "Philip Roth",
+      "publishYear": 1995
+    },
+    {
+      "title": "The Plot Against America",
+      "author": "Philip Roth",
+      "publishYear": 2004
+    },
+    {
+      "title": "The Leftovers",
+      "author": "Tom Perrotta",
+      "publishYear": 2011
+    },
+    {
+      "title": "The Glass Hotel",
+      "author": "Emily St. John Mandel",
+      "publishYear": 2020
+    },
+    {
+      "title": "Sea of Tranquility",
+      "author": "Emily St. John Mandel",
+      "publishYear": 2022
+    },
+    {
+      "title": "Cloud Atlas",
+      "author": "David Mitchell",
+      "publishYear": 2004
+    },
+    {
+      "title": "The Bone Clocks",
+      "author": "David Mitchell",
+      "publishYear": 2014
+    },
+    {
+      "title": "Black Swan Green",
+      "author": "David Mitchell",
+      "publishYear": 2006
+    },
+    {
+      "title": "Number9Dream",
+      "author": "David Mitchell",
+      "publishYear": 2001
+    },
+    {
+      "title": "Ghostwritten",
+      "author": "David Mitchell",
+      "publishYear": 1999
+    },
+    {
+      "title": "Klara and the Sun",
+      "author": "Kazuo Ishiguro",
+      "publishYear": 2021
+    },
+    {
+      "title": "An Artist of the Floating World",
+      "author": "Kazuo Ishiguro",
+      "publishYear": 1986
+    },
+    {
+      "title": "The Buried Giant",
+      "author": "Kazuo Ishiguro",
+      "publishYear": 2015
+    }
+  ]
+}
